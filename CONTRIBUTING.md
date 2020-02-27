@@ -6,28 +6,44 @@ As a financial planning/budgeting app designed for young people in transitional 
 
 ## __Team Norms:__ 
 
-### -- Definition of Done -- 
+### Definition of Done 
 A task is 'done' when it has been completed to the fullest extent, does not require any revisions, and has been seen and approved by other team members.
 
-### -- Working Together and Conflict Resolution -- 
+### Working Together and Conflict Resolution 
 We, as contributers and developers on this project, agree to use welcoming, understanding, and respectful language and actions towards each other. We agree to take constructive criticism well and put the well-being of the project first above personal preference. When conflict/disagreement should arise, we agree to discuss that conflict until everyone is heard and come to a vote or majority agreement on how to move forward. Any kind of harrassment or unacceptable behavior will be reported to the teacher, including not completing individual responsibilities/tasks assigned to them. 
 
-### -- Sprint Cadence -- 
+### Sprint Cadence 
 Sprints should take only a few weeks and should follow the class schedule
 
-### -- Standups Schedule -- 
+### Standups Schedule 
 The tentative standup schedule is Tuesdays and Thursdays at 2:00pm, and Sundays at approx 12:00pm. 
 
-### -- Responding to Messages --
+### Responding to Messages
 Team members should respond to messages directed at them within 24 hours.
 
-### -- Rules for Prioritizing the Backlog -- 
+### Rules for Prioritizing the Backlog 
 The more valuable the outcome of the story, the higher it is in the backlog. The Product Backlog is managed by the Product Owner, but with Developer involvement and feedback. In each sprint the team tries to complete stories from the top of the Backlog, although stories from further down the backlog may be added to a sprint to come up with a level of effort that is achievable.
 
 ## __Git Workflow:__ 
-We use a centralized workflow with the following steps
+We use a feature branch workflow with the following steps
 
-1. 
+1. Start with master branch
+	git checkout master
+	git fetch origin 
+	git reset --hard origin/master
+
+2. Create new branch
+	git checkout -b new-feature
+
+3. Update, add and commit changes
+	git status
+	git add <some-file>
+	git commit -m "some message"
+
+4. Push feature branch to remote 
+	git push -u origin new-feature
+
+5. Create and merge pull request
 
 ## __Rules of Contributing:__ 
 Contributions should do one of the following
