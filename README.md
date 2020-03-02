@@ -12,4 +12,7 @@ This project came to be as we, a group of seniors at NYU, began planning for our
 Contributing.MD
 https://github.com/nyu-software-engineering/spring-2020-cruel-badger/blob/master/CONTRIBUTING.md
 
+Link to Prototype:
+https://invis.io/3UW60H46Z25
+
 (Instructions on building & testing the project)
