@@ -13,6 +13,6 @@ Contributing.MD
 https://github.com/nyu-software-engineering/spring-2020-cruel-badger/blob/master/CONTRIBUTING.md
 
 Link to Prototype:
-https://invis.io/3UW60H46Z25
+https://invis.io/M6W8EAUZ28P
 
 (Instructions on building & testing the project)
