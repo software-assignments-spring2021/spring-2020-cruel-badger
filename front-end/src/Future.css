@@ -2,7 +2,7 @@
 
 
 /*big sections*/
-overall {
+futureOverall {
   /*border: 1px solid red;*/
   display: flex;
   /*padding: 40px;*/
@@ -12,7 +12,7 @@ overall {
   padding-left: 10%;
 }
 
-graph {
+futureGraph {
   /*border: 1px solid blue;*/
   display: flex;
   flex: auto;
@@ -22,7 +22,7 @@ graph {
   padding-left: 2%;
 }
 
-summary {
+futureSummary {
   /*border: 1px solid purple;*/
   display: flex;
   /*padding: 40px;*/
@@ -33,7 +33,7 @@ summary {
 }
 
 /*boxes within the big sections*/
-overViewBox {
+futureOverViewBox {
   flex: auto;
   background-color: green;
   /*border: 1px dotted green;*/
@@ -50,7 +50,11 @@ overViewBox {
   font-size: 40px;
 }
 
-diagramBox {
+.overViewP{
+  color: black;
+}
+
+futureDiagramBox {
   display: flex;
   flex: auto;
   /*border: 1px dotted green;*/
@@ -61,7 +65,7 @@ diagramBox {
   box-shadow: 4px 8px 20px #a1a1a1;
 }
 
-summaryBox {
+futureSummaryBox {
   flex: auto;
   font-family: 'Lato', sans-serif;
   background-color: white;
@@ -71,13 +75,65 @@ summaryBox {
   padding: 20px;
   box-shadow: 4px 8px 20px #a1a1a1;
 }
-
-
-h1 {
+.summaryH1{
   font-weight: bold;
   font-size: 20px;
 }
 
-p {
+.summaryP {
   color: black;
 }
+
+/*For button*/
+.future-button{
+  display: center;
+  position: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.future-modal-button {
+  font-size: 12px;
+}
+.future-modal-button > .button-header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.future-modal-button > .button-content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.future-modal-button > .button-actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.future-modal-button > .future-close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.button-field {
+  display: flex;
+  justify-content: center;
+}
+
+/*
+h1 {
+  font-weight: bold;
+  font-size: 20px;
+}
+*/

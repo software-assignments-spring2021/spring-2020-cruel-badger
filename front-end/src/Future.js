@@ -2,31 +2,32 @@ import React from 'react';
 import './Future.css';
 import Header from './header.js';
 import Chart from "react-google-charts";
+import Popup from "reactjs-popup";
 
-const Overview = ( props ) => {
+const FutureOverview = ( props ) => {
   return (
-    <overViewBox>
+    <futureOverViewBox>
       <h1 className="overViewH1"> {props.heading} </h1>
-      <p> {props.paragraph} </p>
-    </overViewBox>
+      <p className="overViewP"> {props.paragraph} </p>
+    </futureOverViewBox>
   )
 }
 
-const Diagram = ( props ) => {
+const FutureDiagram = ( props ) => {
   return (
-    <diagramBox>
-      /*<h1>{props.title}</h1>
-      <p>{props.text}</p>*/
-    </diagramBox>
+    <futureDiagramBox>
+      /*<h1 className="overViewH1">{props.title}</h1>
+      <p className="overViewP">{props.text}</p>*/
+    </futureDiagramBox>
   )
 }
 
-const Summary = ( props ) => {
+const FutureSummary = ( props ) => {
   return (
-    <summaryBox>
+    <futureSummaryBox>
       <h1 className="summaryH1"> {props.heading} </h1>
         <p className="summaryP">{props.paragraph} </p>
-    </summaryBox>
+    </futureSummaryBox>
   )
 }
 
@@ -35,11 +36,11 @@ const Future = () => {
     return (
       <>
         <Header/>
-        <overall>
-          <Overview heading="Your Future Looks Great!" />
-        </overall>
-        <graph>
-          <diagramBox>
+        <futureOverall>
+          <FutureOverview heading="Your Future Looks Great!" />
+        </futureOverall>
+        <futureGraph>
+          <futureDiagramBox>
             <Chart
               width={'60%'}
               height={'300px'}
@@ -92,14 +93,41 @@ const Future = () => {
               // For tests
               rootProps={{ 'data-testid': '3' }}
             />
-          </diagramBox>
-        </graph>
-        <summary>
-          <Summary heading="Recommendations" paragraph="lorem ipsum recommendation blah" />
-        </summary>
-        <summary>
-          <Summary heading="Outlook on Debt" paragraph="lorem ipsum debt blah" />
-        </summary>
+          </futureDiagramBox>
+        </futureGraph>
+        <futureSummary>
+          <FutureSummary heading="Recommendations" paragraph="lorem ipsum recommendation" />
+        </futureSummary>
+        <futureSummary>
+          <FutureSummary heading="Outlook on Debt" paragraph="lorem ipsum debt" />
+        </futureSummary>
+        <futureSummary>
+          <Popup trigger={<button className="future-button"> Save Future </button>} modal>
+            {close => (
+              <div className="future-modal-button">
+                <a className="future-close" onClick={close}>
+                  &times;
+                </a>
+                <div className="button-header"> Name Your Future </div>
+                <div className="button-content">
+                  {" "}
+                 <form className="button-field">
+                  <input placeholder="Future Name" type="text"/>
+                </form>
+                </div>
+                <div className="button-actions">
+                  <button className="button" onClick={() => {
+                      console.log("modal closed ");
+                      close();
+                    }}
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            )}
+          </Popup>
+        </futureSummary>
       </>
     )
 }
