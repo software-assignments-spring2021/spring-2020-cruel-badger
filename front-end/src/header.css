@@ -12,6 +12,8 @@ body{
 	margin: 0;
 }
 
+
+
 .header{
 	background-color: white;
 	overflow: hidden;
@@ -58,6 +60,9 @@ body{
 
 #corner-login:hover{
 	background-color: #007999;
+}
+.menu-item {
+  text-align: left;
 }
 
 @media screen and (min-width: 416px) {
