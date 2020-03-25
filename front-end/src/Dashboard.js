@@ -3,7 +3,7 @@ import './assets/css/dashboard.css'
 
 import Header from "./header.js";
 
-function Dashboard() {
+function Dashboard(props) {
 	return (
 		<div className="App">
 		<Header/>

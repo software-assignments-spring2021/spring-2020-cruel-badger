@@ -9,9 +9,9 @@ const Header = (props) => {
       <Sidebar/>
       <img id="logo" src="./logo3.png"/>
 
-      <h1 id="title">BROKE MILLENNIAL</h1>
+      <a href="/"><h1 id="title">BROKE MILLENNIAL</h1></a>
 
-      <a id="corner-login" href="/sign-up"> Log In </a>
+      <a id="corner-login" href="/log-in"> Log In </a>
 
     </div>
     );

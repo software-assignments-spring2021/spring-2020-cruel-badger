@@ -6,7 +6,7 @@ import Header from "./header.js";
 
 import TheForm from "./TheForm.js";
 
-function CreateFuture() {
+function CreateFuture(props) {
   return (
     <div className="App">
       <Header/>

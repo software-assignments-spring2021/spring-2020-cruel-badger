@@ -54,3 +54,11 @@
 	width: 50%;
 	border-radius: 100px;
 }
+
+.nextButtonClass {
+	margin: auto;
+}
+
+.backButtonClass {
+	margin: auto;
+}

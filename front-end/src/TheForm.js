@@ -8,7 +8,7 @@ import MoneyOut from "./MoneyOut.js"
 import OtherExpenses from "./OtherExpenses.js"
 import Submit from "./Submit.js"
 
-const TheForm = () => {
+const TheForm = (props) => {
 	let results = {};
 	const handleChange = (event) => {
 		//console.log(event.target.name + "=" + event.target.value);
@@ -34,7 +34,7 @@ const TheForm = () => {
 	return (
 
 		<div className="wizard">
-			<StepZilla  steps={steps} showSteps={false} stepsNavigation={true}/>
+			<StepZilla  steps={steps} showSteps={false} stepsNavigation={true} nextButtonCls={"nextButtonClass"} backButtonCls={"backButtonClass"}/>
 		</div>
 	
 	);
