@@ -11,7 +11,7 @@ const Header = (props) => {
 
       <h1 id="title">BROKE MILLENNIAL</h1>
 
-      <a id="corner-login" href="google.com"> Log In </a>
+      <a id="corner-login" href="/sign-up"> Log In </a>
 
     </div>
     );
