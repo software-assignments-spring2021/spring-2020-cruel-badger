@@ -8,7 +8,8 @@ import CreateFuture from "./CreateFuture.js";
 import Dashboard from "./Dashboard.js";
 import About from "./About.js";
 import Future from "./Future.js";
-
+import Login from "./Login.js";
+import Signup from"./Signup.js";
 
 
 import {
@@ -26,8 +27,8 @@ ReactDOM.render(
 		<Route path="/dashboard" component={Dashboard}/>
 		<Route path="/about" component={About}/>
 		<Route path="/view-future" component={Future}/>
-		<Route path="/log-in" />
-		<Route path="/sign-up" />
+		<Route path="/log-in" component={Login}/>
+		<Route path="/sign-up" component={Signup}/>
 	</BrowserRouter>,
 	document.getElementById('root'));
 

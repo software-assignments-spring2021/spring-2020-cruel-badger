@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Concert+One|Lato&display=swap');
+
+/* COLORS:
+
+  #00aedb #0083A4  #d41243  #8ec127
+
+
+*/
+.signuppage{
+	background-color: #00aedb;
+}
+
+#signuph1{
+	font-family: 'Concert One', cursive;
+	color: white;
+	font-size: 400%;
+	text-align: center;
+}
+
+#signupmainchunk{
+	margin-top: 40px;
+}
+
+#signupform{
+	border-radius: 10px;
+	border: 3px solid #8ec127;
+	background-color: white;
+	width: 16%;
+	margin-left: 42%;
+	margin-top: 30px;
+}
+
+#signupaccess{
+	color: white;
+	font-family: 'Lato', sans-serif;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 130%;
+}
+
+
+.rfe-form{
+	color: #8ec127;
+	font-size: 120%;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-family: 'Lato', sans-serif;
+}
+
+#signupsubmit{
+	background-color: #8ec127;
+	border-radius: 5px;
+	width: 60%;
+}
+
+#signupinside{
+	text-decoration: none;
+	color: white;
+	font-family: 'Lato', sans-serif;
+}
+
+#signupsubmit:hover{
+	background-color: ;
+}
+
+#haveacct{
+	color: white;
+	margin-left: 40%;
+}

@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Concert+One|Lato&display=swap');
+
+/* COLORS:
+
+  #00aedb #0083A4  #d41243  #8ec127
+
+
+*/
+.loginpage{
+	background-color: #00aedb;
+}
+
+#loginh1{
+	font-family: 'Concert One', cursive;
+	color: white;
+	font-size: 400%;
+	text-align: center;
+}
+
+#loginmainchunk{
+	margin-top: 40px;
+}
+
+#loginform{
+	border-radius: 10px;
+	border: 3px solid #8ec127;
+	background-color: white;
+	width: 16%;
+	margin-left: 42%;
+	margin-top: 30px;
+}
+
+#loginaccess{
+	color: white;
+	font-family: 'Lato', sans-serif;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 130%;
+}
+
+
+.rfe-form{
+	color: #8ec127;
+	font-size: 120%;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-family: 'Lato', sans-serif;
+}
+
+#loginsubmit{
+	background-color: #8ec127;
+	border-radius: 5px;
+	width: 60%;
+}
+
+#logininside{
+	text-decoration: none;
+	color: white;
+	font-family: 'Lato', sans-serif;
+}
+
+#loginsubmit:hover{
+	background-color: ;
+}
+
+#donthaveacct{
+	color: white;
+	margin-left: 40%;
+
+}

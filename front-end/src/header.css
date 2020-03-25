@@ -68,6 +68,8 @@ body{
 
   #logo {
   	height: 70px;
+    width: 70px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
   }
 
   #corner-login{
@@ -86,6 +88,8 @@ body{
   #logo {
   	height: 30px;
   	margin-left: 45px;
+    width: 30px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
   }
 
   #corner-login{
