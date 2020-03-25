@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './CreateFuture.css';
 
 import Header from "./header.js";

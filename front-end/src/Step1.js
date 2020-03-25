@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './TheForm.css';
 
 const Step1 = (props) => {

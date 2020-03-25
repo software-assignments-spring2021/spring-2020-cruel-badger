@@ -9,7 +9,7 @@ function About() {
 	return (
 		
 <div className="App">
-
+<Header/>
 <div class="myContainer">
 	<div class="innerBox">
 		<img src={require("./assets/img/logo_draft_1.png")} alt="logo"/>
