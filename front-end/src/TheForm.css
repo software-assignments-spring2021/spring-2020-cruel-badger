@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Thambi+2&display=swap');
+
+.wizard {
+	background: #00aedb;
+	color: #8ec127;
+	width: 75%;
+	margin: auto;
+	border: 10px solid #8eaa27;
+	border-radius: 20px;
+	box-shadow: 20px 20px 50px green;
+	color: white;
+}
+
+.wizard h2 {
+	font-family: 'Concert One', cursive;
+}
+
+.wizard h4 {
+	margin: 0;
+	margin-bottom: 20px;
+}
+
+.submitButton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin: 30px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 2px solid black;
+  box-shadow: 10px 5px 50px green;
+}
+
+.submitButton:hover {
+	background-color: green;
+}
+
+.wizard input {
+	margin-top: 5px;
+}
+.wizard h3 {
+	background: white;
+	color: #00aedb;
+	
+	margin: auto;
+	font-family: 'Baloo Thambi 2', cursive;
+	width: 50%;
+	border-radius: 100px;
+}
