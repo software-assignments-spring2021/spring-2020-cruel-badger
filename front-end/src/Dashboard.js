@@ -1,13 +1,16 @@
 import React from "react";
 import './assets/css/dashboard.css'
 
+import Header from "./header.js";
+
 function Dashboard() {
 	return (
 		<div className="App">
-		
+		<Header/>
 <body> 
 <h2> DASHBOARD</h2>
 <div class="container">
+  <a href="/view-future">
   <div class="card">
     <h3 class="title">Future 1</h3>
     <div class="bar">
@@ -21,6 +24,8 @@ function Dashboard() {
     </svg>
     </div>
   </div>
+  </a>
+  
   <div class="card">
     <h3 class="title">Future 2</h3>
     <div class="bar">
@@ -63,7 +68,7 @@ function Dashboard() {
 </div>
 
 
-<button class="button"><span>Add Future</span></button>
+<a class="button" href="/create-future"><span>Add Future</span></a>
 <h3>Select a card to view more details</h3>
 </body>
 

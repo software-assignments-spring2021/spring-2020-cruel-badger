@@ -7,9 +7,11 @@ export default props => {
     <Menu noOverlay>
       <a className="menu-item" href="/">Home</a>
 
-      <a className="menu-item" href="/createFuture">Create Future </a>
+      <a className="menu-item" href="/create-future">Create Future </a>
 
-      <a className="menu-item" href="/about"> About </a>
+      <a className="menu-item" href="/dashboard">Dashboard </a>
+
+      <a className="menu-item" href="/about">About </a>
     </Menu>
 
 
