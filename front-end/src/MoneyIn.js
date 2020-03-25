@@ -4,7 +4,7 @@ import './TheForm.css';
 function MoneyIn(props) {
 	return (
 		<div>
-			<h2> Money In</h2>
+			<h2 className="stepTitle"> Money In</h2>
 
 			<h3>Enter your Salary</h3>
 			$<input type="text" name="salary" defaultValue={props.results.salary} onChange={props.handleChange}/> <br/>

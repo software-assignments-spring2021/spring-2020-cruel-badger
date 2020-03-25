@@ -11,13 +11,17 @@
 	color: white;
 }
 
-.wizard h2 {
+.wizard .stepTitle {
 	font-family: 'Concert One', cursive;
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 20px;
 }
 
-.wizard h4 {
+.wizard .qExplain {
 	margin: 0;
 	margin-bottom: 20px;
+	text-align: center;
 }
 
 .submitButton {
@@ -26,6 +30,7 @@
   color: white;
   padding: 15px 32px;
   margin: 30px;
+  margin-top: 0px;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;

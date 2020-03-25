@@ -6,7 +6,7 @@ const Step1 = (props) => {
 
 	return (
 		<div>
-			<h2>Intro</h2>
+			<h2 className="stepTitle">Intro</h2>
 			<h3>Name This Plan</h3>
 			<input type="text" name="planName" defaultValue={props.results.planName} onChange={props.handleChange}/>
 
