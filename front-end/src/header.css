@@ -1,0 +1,186 @@
+
+@import url('https://fonts.googleapis.com/css?family=Concert+One|Lato&display=swap');
+
+/* COLORS:
+
+	#00aedb	##0083A4  #d41243  #8ec127
+
+
+*/
+
+body{
+	margin: 0;
+}
+
+.header{
+	background-color: white;
+	overflow: hidden;
+	padding-top: 0px;
+	padding-bottom: 10px;
+	width: 100%;
+	margin: 0;
+	border-bottom: 3px solid #F1F7E4;
+}
+
+#logo{
+	display: block;
+	float: left;
+	padding-top: .5%;
+	margin-left: 9%;
+	margin-top: 10px;
+}
+
+#title {
+	font-family: 'Concert One', cursive;
+	color: #8ec127;
+	width: 55%;
+	margin-right: 0%;
+	margin-left: 2%;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	display: block;
+	float: left;
+	margin-top: 10px;
+}
+
+#corner-login {
+	display: block;
+	text-decoration: none;
+	font-family: 'Lato', sans-serif;
+	float: right;
+	color: white;
+	margin-right: 2%;
+	padding: 5px 5px;
+	background-color: #00aedb;
+	border-radius: 5px;
+	text-align: center;
+}
+
+#corner-login:hover{
+	background-color: #007999;
+}
+
+@media screen and (min-width: 416px) {
+  #title {
+    font-size: 300%;
+    line-height: 80px;
+  }
+
+  #logo {
+  	height: 70px;
+  }
+
+  #corner-login{
+  	font-size: 110%;
+  	margin-top: 35px;
+  	width: 80px;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  #title {
+    font-size: 150%;
+    line-height: 30px;
+  }
+
+  #logo {
+  	height: 30px;
+  	margin-left: 45px;
+  }
+
+  #corner-login{
+  	font-size: 60%;
+  	margin-top: 13px;
+  	width: 40px;
+  }
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+  font-family: 'Lato', sans-serif;
+  color: white;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+}
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: absolute;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #00aedb;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: white;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #0083A4;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0);
+}
+
+@media screen and (min-width: 416px) {
+	.bm-burger-button{
+	  width: 36px;
+	  height: 30px;
+	  left: 36px;
+	  top: 36px;
+	}
+
+}
+
+
+@media screen and (max-width: 415px) {
+	.bm-burger-button{
+	  width: 16px;
+	  height: 10px;
+	  left: 16px;
+	  top: 16px;
+	  margin-top: 5px;
+	}
+
+}
+
