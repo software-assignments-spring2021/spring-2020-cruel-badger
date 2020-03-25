@@ -14,17 +14,25 @@ futureOverall {
 
 futureGraph {
   /*border: 1px solid blue;*/
-  display: flex;
-  flex: auto;
+  /*background-color: yellow;*/
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-content: space-around + safe;
+  position: center;
   padding-top: 2%;
+  width: 100%;
   padding-bottom: 2%;
-  padding-right: 2%;
-  padding-left: 2%;
+  padding-right: 1%;
+  padding-left: 1%;
 }
+
+
 
 futureSummary {
   /*border: 1px solid purple;*/
   display: flex;
+  justify-content: center;
   /*padding: 40px;*/
   padding-top: 2%;
   padding-bottom: 2%;
@@ -55,13 +63,12 @@ futureOverViewBox {
 }
 
 futureDiagramBox {
-  display: flex;
-  flex: auto;
   /*border: 1px dotted green;*/
   font-family: 'Lato', sans-serif;
+
   /*margin: 20px;*/
-  padding-right: 5%;
-  padding-left: 5%;
+  /*padding-right: 5%;
+  padding-left: 5%;*/
   box-shadow: 4px 8px 20px #a1a1a1;
 }
 
@@ -87,9 +94,34 @@ futureSummaryBox {
 /*For button*/
 .future-button{
   display: center;
-  position: center;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  border-radius: 4px;
+  background-color: #D41243;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.future-save-button{
+  display: center;
+  position: relative;
+  border-radius: 4px;
+  background-color: #D41243;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px;
+  padding: 15px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
 }
 
 .future-modal-button {
