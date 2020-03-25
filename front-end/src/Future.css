@@ -1,0 +1,83 @@
+@import url(https://fonts.googleapis.com/css?family=Concert+One|Lato&display=swap’);
+
+
+/*big sections*/
+overall {
+  /*border: 1px solid red;*/
+  display: flex;
+  /*padding: 40px;*/
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+graph {
+  /*border: 1px solid blue;*/
+  display: flex;
+  flex: auto;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 2%;
+  padding-left: 2%;
+}
+
+summary {
+  /*border: 1px solid purple;*/
+  display: flex;
+  /*padding: 40px;*/
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+/*boxes within the big sections*/
+overViewBox {
+  flex: auto;
+  background-color: green;
+  /*border: 1px dotted green;*/
+  font-family: 'Concert One', cursive;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 4px 8px 20px #a1a1a1;
+}
+
+.overViewH1 {
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+diagramBox {
+  display: flex;
+  flex: auto;
+  /*border: 1px dotted green;*/
+  font-family: 'Lato', sans-serif;
+  /*margin: 20px;*/
+  padding-right: 5%;
+  padding-left: 5%;
+  box-shadow: 4px 8px 20px #a1a1a1;
+}
+
+summaryBox {
+  flex: auto;
+  font-family: 'Lato', sans-serif;
+  background-color: white;
+  /*border: 1px dotted green;*/
+  text-align: left;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 4px 8px 20px #a1a1a1;
+}
+
+
+h1 {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+p {
+  color: black;
+}
