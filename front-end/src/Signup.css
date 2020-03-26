@@ -68,3 +68,37 @@
 	color: white;
 	margin-left: 40%;
 }
+
+
+@media screen and (min-width: 416px){
+	#signupform{
+		width: 16%;
+		margin-left: 42%;
+	}
+
+	#haveacct{
+		margin-left: 40%;
+	}
+
+	.signuppage{
+		height: 700px;
+	}
+
+}
+
+
+@media screen and (max-width: 415px) {
+	#signupform{
+		width: 40%;
+		margin-left: 30%;
+	}
+
+	#haveacct{
+		margin-left: 16%;
+	}
+
+	.signuppage{
+		height: 900px;
+	}
+
+}
