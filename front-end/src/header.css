@@ -37,12 +37,13 @@ body{
 	color: #8ec127;
 	width: 55%;
 	margin-right: 0%;
-	margin-left: 2%;
+  margin-left: 2%;
 	margin-top: 0%;
 	margin-bottom: 0%;
 	display: block;
 	float: left;
 	margin-top: 10px;
+  text-align: left;
 }
 
 #corner-login {
