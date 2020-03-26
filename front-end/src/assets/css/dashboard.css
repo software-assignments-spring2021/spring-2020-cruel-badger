@@ -30,31 +30,22 @@ body {
   padding-top: 2px;
   margin-top: 350px;
   margin-bottom: auto;
-  background-color: #100e17;
+  background-color: white;
   position: absolute;
-  height: 300px;
-  width: 600px;
   top: 60px;
-  left: calc(50% - 300px);
   display: flex;
 }
 
 .card {
   display: flex;
-  height: 280px;
-  width: 200px;
   background-color: #D41243;
   border-radius: 10px;
-  box-shadow: -1rem 0 3rem #000;
 /*   margin-left: -50px; */
   transition: 0.4s ease-out;
   position: relative;
   left: 0px;
 }
 
-.card:not(:first-child) {
-    margin-left: -50px;
-}
 
 .card:hover {
   transform: translateY(-20px);
@@ -109,7 +100,6 @@ body {
 .circle {
   position: absolute;
   top: 150px;
-  left: calc(50% - 60px);
 }
 
 .stroke {
@@ -189,5 +179,76 @@ svg {
 
 .btn:hover {
   background-color: #e8416b;
+}
+
+
+@media screen and (min-width: 416px) {
+  .container{
+    height: 300px;
+    width: 600px;
+    left: calc(50% - 300px);
+  }
+
+  .card{
+    height: 280px;
+    width: 200px;
+    box-shadow: -1rem 0 3rem #000;
+  }
+
+  .circle{
+    left: calc(50% - 60px);
+  }
+
+  .card:not(:first-child) {
+    margin-left: -50px;
+  }
+
+
+
+}
+
+
+@media screen and (max-width: 415px) {
+  .container{
+    width: 200px;
+    height: 200px;
+    left: 13%;
+  }
+
+
+  .card{
+    height: 200px;
+    width:100px;
+    box-shadow: 0rem 0 3rem #000;
+  }
+
+  .circle{
+    opacity: 0;
+  }
+
+  .card:not(:first-child) {
+   margin-left: -10px;
+  } 
+
+  .bar{
+    width: 60px;
+    left: 5px;
+  }
+
+  .btn{
+    height: 20px;
+    width: 12px;
+    padding-left: 5px;
+    padding-top: 1px;
+    margin-left: 55px;
+  }
+
+  .title{
+    left: 2px;
+  }
+
+
+
+
 }
 

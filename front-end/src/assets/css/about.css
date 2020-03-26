@@ -137,6 +137,19 @@ h4 {
 }
 
 
+@media screen and (max-width: 415px) {
+	.description_container_top {
+		width: 40%;
+	}
+
+	.description_container_mid {
+		width: 40%;
+	}
+
+
+}
+
+
 
 
 
