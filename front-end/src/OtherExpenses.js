@@ -30,7 +30,7 @@ const OtherExpenses = (props) => {
 
 			<h3>Enter any other expenses you could have</h3>
 			<h4 className="qExplain">Consider vacations, donations, etc</h4>
-			From $<input type="text" name="otherLow" onChange={props.handleChange} defaultValue={props.results.otherLow}/> To $<input type="text" name="otherHigh" defaultValue={props.results.otherHigh}/> <br/>
+			From $<input type="text" name="otherLow" onChange={props.handleChange} defaultValue={props.results.otherLow}/> To $<input type="text" name="otherHigh" onChange={props.handleChange} defaultValue={props.results.otherHigh}/> <br/>
 			Weekly:<input type="radio" name="otherType" defaultChecked={props.results.otherType === "weekly" ? true : false} onChange={props.handleChange} value="weekly" />
 			Monthly:<input type="radio" name="otherType" defaultChecked={props.results.otherType === "monthly" ? true : false} onChange={props.handleChange} value="monthly" />
 
