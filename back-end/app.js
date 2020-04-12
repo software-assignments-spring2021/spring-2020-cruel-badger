@@ -144,7 +144,8 @@ app.post("/processFormData", (req, res) => {
 	    "pay_rate":yearlyIncome
 	    }
     })
-    .then((response)=>{
+    .then((response)=> {
+      console.log(`Future name is  ${formData.planName}`)
       console.log(`State is ${formData.state}`)
       console.log(`Income is ${yearlyIncome}`)
       //console.log(response.data)
@@ -159,6 +160,17 @@ app.post("/processFormData", (req, res) => {
 
       console.log(`MONEY COMING IN PER YEAR: ${moneyIn}`)
       console.log(`MONEY GOING OUT PER YEAR: ${moneyOut}`)
+
+
+      //ADDED BY SKYE
+      let formObj = {	name: formData.planName, 
+      					state: formData.state, 
+      					income: yearlyIncome,
+      					tax: totalTax,
+      					inFlow: moneyIn,
+      					outFlow: moneyOut
+      				};
+      	console.log(formObj);
 
 
     })
