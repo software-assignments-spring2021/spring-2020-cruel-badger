@@ -1,40 +1,40 @@
-import React, {Component, useState} from "react";
+import React, {Component, useState, useEffect} from "react";
 import './assets/css/dashboard.css'
 import Header from "./header.js";
 
 
 //hard-coded data for testing purposes (will be changed)
-let formObjects = [{  name: "Go to Grad school", 
-                      state: "IL", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Take a vacation", 
-                      state: "IN", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Move back home", 
-                      state: "NV", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Accept that CS job", 
-                      state: "CA", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    }
-];
+// let formObjects = [{  name: "Go to Grad school", 
+//                       state: "IL", 
+//                       income: 1000,
+//                       tax: 1000,
+//                       inFlow: 1000,
+//                       outFlow: 1000
+//                     },
+//                     {  name: "Take a vacation", 
+//                       state: "IN", 
+//                       income: 1000,
+//                       tax: 1000,
+//                       inFlow: 1000,
+//                       outFlow: 1000
+//                     },
+//                     {  name: "Move back home", 
+//                       state: "NV", 
+//                       income: 1000,
+//                       tax: 1000,
+//                       inFlow: 1000,
+//                       outFlow: 1000
+//                     },
+//                     {  name: "Accept that CS job", 
+//                       state: "CA", 
+//                       income: 1000,
+//                       tax: 1000,
+//                       inFlow: 1000,
+//                       outFlow: 1000
+//                     }
+// ];
 
-
+let [formObjects, setFormObjects] = useState([]);
 
 
 function renderCard(name, state) {
