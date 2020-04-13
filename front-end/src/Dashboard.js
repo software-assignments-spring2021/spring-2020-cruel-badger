@@ -1,39 +1,39 @@
-import React, {Component, useState} from "react";
+import React, {Component, useState, useEffect} from "react";
 import './assets/css/dashboard.css'
 import Header from "./header.js";
+import axios from "axios";
 
 
 //hard-coded data for testing purposes (will be changed)
-let formObjects = [{  name: "Go to Grad school", 
-                      state: "IL", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Take a vacation", 
-                      state: "IN", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Move back home", 
-                      state: "NV", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Accept that CS job", 
-                      state: "CA", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    }
-];
-
+// let formObjects = [{  name: "Go to Grad school", 
+//                       state: "IL", 
+//                       income: 1000,
+//                       tax: 1000,
+//                       inFlow: 1000,
+//                       outFlow: 1000
+//                     },
+//                     {  name: "Take a vacation", 
+//                       state: "IN", 
+//                       income: 1000,
+//                       tax: 1000,
+//                       inFlow: 1000,
+//                       outFlow: 1000
+//                     },
+//                     {  name: "Move back home", 
+//                       state: "NV", 
+//                       income: 1000,
+//                       tax: 1000,
+//                       inFlow: 1000,
+//                       outFlow: 1000
+//                     },
+//                     {  name: "Accept that CS job", 
+//                       state: "CA", 
+//                       income: 1000,
+//                       tax: 1000,
+//                       inFlow: 1000,
+//                       outFlow: 1000
+//                     }
+// ];
 
 
 
@@ -71,8 +71,13 @@ function renderCard(name, state) {
 
 
 function Dashboard(props) {
-
-  console.log(props.plans);
+  let [formObjects, setFormObjects] = useState([]); 
+  useEffect(() => {
+    axios.get("/futures-array").then(function(response) {
+      setFormObjects(response.data);
+    });
+  });
+  console.log(props);
 
 
   // const [cardTitle, setCardTitle] = useState("");

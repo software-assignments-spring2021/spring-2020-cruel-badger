@@ -5,6 +5,39 @@ const cors = require("cors");
 
 const app = express();
 
+
+//dummy data for testing
+let futureArray = [{  name: "Go to Grad school", 
+                      state: "IL", 
+                      income: 1000,
+                      tax: 1000,
+                      inFlow: 1000,
+                      outFlow: 1000
+                    },
+                    {  name: "Take a vacation", 
+                      state: "IN", 
+                      income: 1000,
+                      tax: 1000,
+                      inFlow: 1000,
+                      outFlow: 1000
+                    },
+                    {  name: "Move back home", 
+                      state: "NV", 
+                      income: 1000,
+                      tax: 1000,
+                      inFlow: 1000,
+                      outFlow: 1000
+                    },
+                    {  name: "Accept that CS job", 
+                      state: "CA", 
+                      income: 1000,
+                      tax: 1000,
+                      inFlow: 1000,
+                      outFlow: 1000
+                    }
+];
+
+
 let plans = []
 
 app.use(cors());
@@ -187,6 +220,11 @@ app.post("/processFormData", (req, res) => {
     })
 })
 
+
+//get function to get array of futures
+app.get('/futures-array', (req, res) => {
+    res.send(futureArray);
+});
 
 
 app.listen(4000);
