@@ -329,17 +329,7 @@ app.post("/processFormData", (req, res) => {
 
 
       
-      // let formObj = {	name: formData.planName, 
-      // 					state: formData.state, 
-      // 					income: yearlyIncome,
-      // 					tax: totalTax,
-      // 					inFlow: moneyIn,
-      // 					outFlow: moneyOut
-      // 				};
-      // 	console.log(formObj);
-      // 	res.json(formObj)
-
-      // 	plans.push(formObj)
+     
 
 
       	let currentState = abbrToState(formData.currentState);
