@@ -37,7 +37,10 @@ import axios from "axios";
 
 
 
-function renderCard(name, state) {
+
+function renderCard(name, state, index) {
+
+// function renderCard(name, state) {
 
   function handleClick(e) {
     e.preventDefault();
@@ -45,6 +48,7 @@ function renderCard(name, state) {
     alert("Future has been deleted");
 
   }
+
 
 
   return (
@@ -58,7 +62,7 @@ function renderCard(name, state) {
 
           <div className="filledbar"></div>
           </div>
-          <a href="/view-future">
+          <a href={"/view-future/" + index}>
           <div className="circle">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
               <circle className="stroke" cx="60" cy="60" r="50"/>
@@ -98,7 +102,8 @@ function Dashboard(props) {
 
 
       <div className="container">
-          {formObjects.map(obj => (renderCard(obj.name, obj.futureStateAbbr)))}
+          {formObjects.map((obj, index) => (renderCard(obj.name, obj.futureStateAbbr, index)))}
+          //{formObjects.map(obj => (renderCard(obj.name, obj.futureStateAbbr)))}
       </div>
 
 
