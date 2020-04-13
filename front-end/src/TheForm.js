@@ -16,7 +16,6 @@ import { Redirect, Link, useHistory } from "react-router-dom";
 const TheForm = (props) => {
 	const history = useHistory();
 	let results = {};
-	let classTemp = "hidden"
 	const handleChange = (event) => {
 		//console.log(event.target.name + "=" + event.target.value);
 		results[event.target.name] = event.target.value;

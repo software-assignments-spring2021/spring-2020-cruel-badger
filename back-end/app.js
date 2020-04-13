@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const app = express();
 
+let plans = []
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
@@ -19,6 +20,10 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
 	res.send("This is the backend");
+})
+
+app.get("/dashboard", (req, res) => {
+	res.json(plans)
 })
 
 
@@ -172,6 +177,8 @@ app.post("/processFormData", (req, res) => {
       				};
       	console.log(formObj);
       	res.json(formObj)
+
+      	plans.push(formObj)
 
 
     })
