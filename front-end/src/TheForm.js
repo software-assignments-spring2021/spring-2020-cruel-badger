@@ -9,8 +9,14 @@ import OtherExpenses from "./OtherExpenses.js"
 import Submit from "./Submit.js"
 import axios from "axios"
 
+
+import { Redirect, Link, useHistory } from "react-router-dom";
+
+
 const TheForm = (props) => {
+	const history = useHistory();
 	let results = {};
+	let classTemp = "hidden"
 	const handleChange = (event) => {
 		//console.log(event.target.name + "=" + event.target.value);
 		results[event.target.name] = event.target.value;
@@ -21,9 +27,10 @@ const TheForm = (props) => {
 		console.log("Handling Submit")
 		console.log("Results are");
 		console.log(results);
-
 		//callAPI();
 		//axios.post("http://localhost:4000/processFormData", {data:"hello"});
+
+
 		axios({
 	    "method":"POST",
 	    "url":"http://localhost:4000/processFormData",
@@ -33,9 +40,18 @@ const TheForm = (props) => {
 	    data: results
     	}).then(response => {
     		console.log(response);
+
+    		history.push({
+				pathname: '/view-future',
+				state: { data: response.data }
+			})
+
     	}).catch(error => {
     		console.log(error);
     	})
+
+    
+  
 
 	}
 
@@ -54,11 +70,12 @@ const TheForm = (props) => {
 	]
 
 	return (
+		<div>
+			<div className="wizard">
+				<StepZilla  steps={steps} showSteps={false} stepsNavigation={true} nextButtonCls={"nextButtonClass"} backButtonCls={"backButtonClass"}/>
+			</div>
 
-		<div className="wizard">
-			<StepZilla  steps={steps} showSteps={false} stepsNavigation={true} nextButtonCls={"nextButtonClass"} backButtonCls={"backButtonClass"}/>
 		</div>
-	
 	);
 
 
