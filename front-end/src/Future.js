@@ -39,7 +39,7 @@ const Future = (props) => {
     let [pieData, setPieData] = useState([]);
     let [barData, setBarData] = useState([]);
     useEffect(() => {
-      axios.get("/futureArrayTest", {params: {id: futureID}}).then(function(response) {
+      axios.get("/futureDataTest", {params: {id: futureID}}).then(function(response) {
         console.log(response.data);
         setPieData(response.data.pieChart);
         setBarData(response.data.barChart);
@@ -89,10 +89,10 @@ const Future = (props) => {
           </futureDiagramBox>
         </futureGraph>
         <futureSummary>
-          <FutureSummary heading="Recommendations" paragraph="lorem ipsum recommendation" />
+          <FutureSummary heading="Recommendations" paragraph="Great job! You have more money coming in than you're spending! The cost of living in New York is higher than the cost of living in California so watch out on those expenses!" />
         </futureSummary>
         <futureSummary>
-          <FutureSummary heading="Outlook on Debt" paragraph="lorem ipsum debt" />
+          <FutureSummary heading="Outlook on Debt" paragraph="You have no debt! You have saved a month of expenses. Good job!" />
         </futureSummary>
         <futureSummary>
           <Popup trigger={<button className="future-button"> Save Future </button>} modal>
