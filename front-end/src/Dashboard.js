@@ -1,6 +1,7 @@
 import React, {Component, useState, useEffect} from "react";
 import './assets/css/dashboard.css'
 import Header from "./header.js";
+import axios from "axios";
 
 
 //hard-coded data for testing purposes (will be changed)
@@ -34,7 +35,6 @@ import Header from "./header.js";
 //                     }
 // ];
 
-let [formObjects, setFormObjects] = useState([]);
 
 
 function renderCard(name, state) {
@@ -62,17 +62,22 @@ function renderCard(name, state) {
 
 
 
-function processFutures() {
-  for (let i = 0; i < formObjects.length; i++) {
-    const card = renderCard();
-    return card;
-  }
-}
+// function processFutures() {
+//   for (let i = 0; i < formObjects.length; i++) {
+//     const card = renderCard();
+//     return card;
+//   }
+// }
 
 
 function Dashboard(props) {
-
-  console.log(props);
+  let [formObjects, setFormObjects] = useState([]);
+  //console.log(props); 
+  useEffect(() => {
+    axios.get("/futures-array").then(function(response) {
+      setFormObjects(response.data);
+    });
+  });
 
 
   // const [cardTitle, setCardTitle] = useState("");
