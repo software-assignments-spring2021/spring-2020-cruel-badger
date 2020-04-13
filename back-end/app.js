@@ -226,6 +226,12 @@ app.get('/futures-array', (req, res) => {
     res.send(futureArray);
 });
 
+app.get('/futureArrayTest', (req, res) => {
+	let index = JSON.parse(req.query.id);
+	console.log(index.id);
+    res.send(futureArray[index.id]);
+});
+
 //testing future results
 app.get('/futureDataTest', (req, res) => {
     // assemble an object containing the data we want to send

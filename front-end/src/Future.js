@@ -4,6 +4,7 @@ import Header from './header.js';
 import Chart from "react-google-charts";
 import Popup from "reactjs-popup";
 import axios from "axios";
+import { useParams } from "react-router";
 
 const FutureOverview = ( props ) => {
   return (
@@ -33,11 +34,13 @@ const FutureSummary = ( props ) => {
 }
 
 
-const Future = () => {
+const Future = (props) => {
+  let futureID = useParams();
     let [pieData, setPieData] = useState([]);
     let [barData, setBarData] = useState([]);
     useEffect(() => {
-      axios.get("/futureDataTest").then(function(response) {
+      axios.get("/futureArrayTest", {params: {id: futureID}}).then(function(response) {
+        console.log(response.data);
         setPieData(response.data.pieChart);
         setBarData(response.data.barChart);
       });
