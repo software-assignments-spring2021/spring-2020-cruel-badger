@@ -39,12 +39,12 @@ const Future = (props) => {
     let [pieData, setPieData] = useState([]);
     let [barData, setBarData] = useState([]);
     useEffect(() => {
-      axios.get("/futureDataTest", {params: {id: futureID}}).then(function(response) {
+      axios.get("/futureArrayTest", {params: {id: futureID}}).then(function(response) {
         console.log(response.data);
         setPieData(response.data.pieChart);
         setBarData(response.data.barChart);
       });
-    });
+    }, []);
     return (
       <>
         <Header/>

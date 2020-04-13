@@ -7,7 +7,7 @@ const Header = (props) => {
   return (
     <div className="header">
       <Sidebar/>
-      <img id="logo" src="./logo3.png"/>
+      <img id="logo" src="../logo3.png"/>
 
       <a href="/"><h1 id="title">BROKE MILLENNIAL</h1></a>
 
