@@ -37,15 +37,15 @@ let formObjects = [{  name: "Go to Grad school",
 
 
 
-function renderCard() {
+function renderCard(name, state) {
   return (
      <div class="card">
-          <h3 class="title">Future 2</h3>
+          <h3 class="title">{name}</h3>
           <button class="btn"><i class="fa fa-trash"></i></button>
           <div class="bar">
           <div class="emptybar"></div>
 
-              <p> {formObjects[0].name}</p>
+              <p> {state} </p>
 
           <div class="filledbar"></div>
           </div>
@@ -80,7 +80,7 @@ function Dashboard(props) {
 
 
       <div class="container">
-          <div>{processFutures()} </div>
+          {formObjects.map(obj => (renderCard(obj.name, obj.state)))}
       </div>
 
 
