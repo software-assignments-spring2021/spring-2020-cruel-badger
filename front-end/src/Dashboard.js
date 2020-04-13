@@ -62,12 +62,12 @@ function renderCard(name, state) {
 
 
 
-function processFutures() {
-  for (let i = 0; i < formObjects.length; i++) {
-    const card = renderCard();
-    return card;
-  }
-}
+// function processFutures() {
+//   for (let i = 0; i < formObjects.length; i++) {
+//     const card = renderCard();
+//     return card;
+//   }
+// }
 
 
 function Dashboard(props) {
