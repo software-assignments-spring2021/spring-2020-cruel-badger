@@ -89,7 +89,7 @@ function Dashboard(props) {
 
 
       <div className="container">
-          {formObjects.map(obj => (renderCard(obj.name, obj.state)))}
+          {formObjects.map(obj => (renderCard(obj.name, obj.futureStateAbbr)))}
       </div>
 
 
