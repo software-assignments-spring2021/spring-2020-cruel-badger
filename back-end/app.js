@@ -1,53 +1,129 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
-
+const fs = require("fs");
 
 const app = express();
 
+let plans = []
 
-//dummy data for testing
-let futureArray = [{  name: "Go to Grad school", 
-                      state: "IL", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Take a vacation", 
-                      state: "IN", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Move back home", 
-                      state: "NV", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    },
-                    {  name: "Accept that CS job", 
-                      state: "CA", 
-                      income: 1000,
-                      tax: 1000,
-                      inFlow: 1000,
-                      outFlow: 1000
-                    }
+
+
+
+let futureArray = [{
+
+		      		name: "Work in WI",
+		      		currentStateAbbr: "NY",
+		      		futureStateAbbr: "WI",
+		      		currentStateLong: "New York",
+		      		futureStateLong: "Wisconsin",
+		      		currentStateData: {
+		            "State": "New York",
+		            "costIndex": "139.1000",
+		            "costRank": 48,
+		            "groceryCost": "114.8000",
+		            "housingCost": "204.4000",
+		            "utilitiesCost": "108.7000",
+		            "transportationCost": "116.6000",
+		            "miscCost": "104.8000"
+		        },
+		      		futureStateData: {
+		            "State": "Wisconsin",
+		            "costIndex": "97.3000",
+		            "costRank": 25,
+		            "groceryCost": "100.7000",
+		            "housingCost": "91.4000",
+		            "utilitiesCost": "98.9000",
+		            "transportationCost": "98.1000",
+		            "miscCost": "115.2000"
+		        },
+		      		yearlyIncome: 105000,
+		      		yearlyOtherIncome: 12000,
+		      		moneyIn: 117000,
+		      		moneyIn_tax: 87040.48,
+		      		yearlyHousing: 21000,
+		      		yearlyFood: 9125,
+		      		yearlyTransport: 2100,
+		      		yearlySavings: 12000,
+		      		yearlyLeisure: 9100,
+		      		yearlyOther: 4200,
+		      		moneyOut: 87484.52,
+		      		moneyOut_tax: 57525,
+		      		adjustedFood: 8004.26,
+		      		adjustedHousing: 9390.41,
+		      		adjustedTransport: 1766.81,
+		      		adjustedLeisure: 6365.42,
+		      		adjustedOther: 2937.89,
+		      		adjustedMoneyOut: 70424.29,
+		      		adjustedMoneyOut_tax: 40464.77
+
+		      	},
+                    {
+
+		      		name: "Chill in HI",
+		      		currentStateAbbr: "NY",
+		      		futureStateAbbr: "HI",
+		      		currentStateLong: "New York",
+		      		futureStateLong: "Hawaii",
+		      		currentStateData: {
+		            "State": "New York",
+		            "costIndex": "139.1000",
+		            "costRank": 48,
+		            "groceryCost": "114.8000",
+		            "housingCost": "204.4000",
+		            "utilitiesCost": "108.7000",
+		            "transportationCost": "116.6000",
+		            "miscCost": "104.8000"
+		        },
+		      		futureStateData: {
+		            "State": "Hawaii",
+		            "costIndex": "192.9000",
+		            "costRank": 51,
+		            "groceryCost": "169.3000",
+		            "housingCost": "318.6000",
+		            "utilitiesCost": "172.7000",
+		            "transportationCost": "148.6000",
+		            "miscCost": "116.8000"
+		        },
+		      		yearlyIncome: 20000,
+		      		yearlyOtherIncome: 12000,
+		      		moneyIn: 123456,
+		      		moneyIn_tax: 123456,
+		      		yearlyHousing: 12,
+		      		yearlyFood: 23,
+		      		yearlyTransport: 36,
+		      		yearlySavings: 34,
+		      		yearlyLeisure: 7654,
+		      		yearlyOther: 53454,
+		      		moneyOut: 346.52,
+		      		moneyOut_tax: 642,
+		      		adjustedFood: 543.26,
+		      		adjustedHousing: 65432.41,
+		      		adjustedTransport: 346.81,
+		      		adjustedLeisure: 6234.42,
+		      		adjustedOther: 634.89,
+		      		adjustedMoneyOut: 632.29,
+		      		adjustedMoneyOut_tax: 3246.77
+
+		      	}
 ];
 
 
-let plans = []
+let cost_json = JSON.parse(fs.readFileSync("cost_data.json"));
+let cost_data = cost_json.data
+//console.log(cost_data);
+
+
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-	// console.log("In middleware")
-	// console.log(req.path);
-	// console.log(req.body);
+	console.log("In middleware")
+	console.log(req.path);
+	console.log(plans);
 	next();
+
 })
 
 
@@ -58,6 +134,66 @@ app.get("/", (req, res) => {
 app.get("/dashboard", (req, res) => {
 	res.json(plans)
 })
+
+let abbrToState = (abbr) => {
+	var states = [
+        ['Arizona', 'AZ'],
+        ['Alabama', 'AL'],
+        ['Alaska', 'AK'],
+        ['Arkansas', 'AR'],
+        ['California', 'CA'],
+        ['Colorado', 'CO'],
+        ['Connecticut', 'CT'],
+        ['Delaware', 'DE'],
+        ['Florida', 'FL'],
+        ['Georgia', 'GA'],
+        ['Hawaii', 'HI'],
+        ['Idaho', 'ID'],
+        ['Illinois', 'IL'],
+        ['Indiana', 'IN'],
+        ['Iowa', 'IA'],
+        ['Kansas', 'KS'],
+        ['Kentucky', 'KY'],
+        ['Louisiana', 'LA'],
+        ['Maine', 'ME'],
+        ['Maryland', 'MD'],
+        ['Massachusetts', 'MA'],
+        ['Michigan', 'MI'],
+        ['Minnesota', 'MN'],
+        ['Mississippi', 'MS'],
+        ['Missouri', 'MO'],
+        ['Montana', 'MT'],
+        ['Nebraska', 'NE'],
+        ['Nevada', 'NV'],
+        ['New Hampshire', 'NH'],
+        ['New Jersey', 'NJ'],
+        ['New Mexico', 'NM'],
+        ['New York', 'NY'],
+        ['North Carolina', 'NC'],
+        ['North Dakota', 'ND'],
+        ['Ohio', 'OH'],
+        ['Oklahoma', 'OK'],
+        ['Oregon', 'OR'],
+        ['Pennsylvania', 'PA'],
+        ['Rhode Island', 'RI'],
+        ['South Carolina', 'SC'],
+        ['South Dakota', 'SD'],
+        ['Tennessee', 'TN'],
+        ['Texas', 'TX'],
+        ['Utah', 'UT'],
+        ['Vermont', 'VT'],
+        ['Virginia', 'VA'],
+        ['Washington', 'WA'],
+        ['West Virginia', 'WV'],
+        ['Wisconsin', 'WI'],
+        ['Wyoming', 'WY'],
+    ];
+
+    for (let i = 0; i < states.length; i++) {
+    	if (abbr === states[i][1]) return states[i][0];
+    }
+    
+}
 
 
 //route to recieve and process front end results
@@ -177,14 +313,14 @@ app.post("/processFormData", (req, res) => {
 	    "content-type":"application/json",
 	    "authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUElfS0VZX01BTkFHRVIiLCJodHRwOi8vdGF4ZWUuaW8vdXNlcl9pZCI6IjVlOGUyODMzZjEyNWY2MTQ3MmMyM2EyOSIsImh0dHA6Ly90YXhlZS5pby9zY29wZXMiOlsiYXBpIl0sImlhdCI6MTU4NjM3NDcwN30.ULT5iDPIVHdGBVCqRDNSQaNJjrDRW1dLQO1gwNaFy1U"
 	    },"data":{
-	    "state":formData.state,
+	    "state":formData.futureState,
 	    "filing_status":"single",
 	    "pay_rate":yearlyIncome
 	    }
     })
     .then((response)=> {
       console.log(`Future name is  ${formData.planName}`)
-      console.log(`State is ${formData.state}`)
+      console.log(`State is ${formData.futureState}`)
       console.log(`Income is ${yearlyIncome}`)
       //console.log(response.data)
 
@@ -201,18 +337,86 @@ app.post("/processFormData", (req, res) => {
 
 
       //ADDED BY SKYE
-      let formObj = {	name: formData.name, 
-      					state: formData.state, 
-      					income: yearlyIncome,
-      					tax: totalTax,
-      					inFlow: moneyIn,
-      					outFlow: moneyOut
-      				};
-      	console.log(formObj);
-      	res.json(formObj)
+      // let formObj = {	name: formData.planName, 
+      // 					state: formData.state, 
+      // 					income: yearlyIncome,
+      // 					tax: totalTax,
+      // 					inFlow: moneyIn,
+      // 					outFlow: moneyOut
+      // 				};
+      // 	console.log(formObj);
+      // 	res.json(formObj)
 
-      	futureArray.push(formObj)
+      // 	plans.push(formObj)
 
+
+      	let currentState = abbrToState(formData.currentState);
+      	let currentCostData = {}
+
+      	let futureState = abbrToState(formData.futureState);
+		let futureCostData = {}
+
+      	for (let i = 0; i < cost_data.length; i++) {
+      		if (cost_data[i].State === currentState) {
+      			currentCostData = cost_data[i];
+      		}
+      		if (cost_data[i].State === futureState) {
+      			futureCostData = cost_data[i];
+      		}
+      	}
+
+      	let costAdjustment = ((futureCostData.costIndex / currentCostData.costIndex));
+      	let foodAdjustment = ((futureCostData.groceryCost / currentCostData.groceryCost));
+      	let transportAdjustment = ((futureCostData.transportationCost / currentCostData.transportationCost));
+      	let housingAdjustment = ((futureCostData.housingCost / currentCostData.housingCost));
+
+      	let adjustedFood = yearlyFood * foodAdjustment;
+      	let adjustedHousing = yearlyHousing * housingAdjustment;
+      	let adjustedTransport = yearlyTransport * transportAdjustment;
+      	let adjustedLeisure = yearlyLeisure * costAdjustment;
+      	let adjustedOther = yearlyOther * costAdjustment;
+
+      	console.log("Adjusted cost of food: " + adjustedFood)
+      	console.log("Adjusted cost of housing: " + adjustedHousing)
+      	console.log("Adjusted cost of transport: " + adjustedTransport)
+      	console.log("Adjusted cost of leisure: " + adjustedLeisure)
+      	console.log("Adjusted cost of other: " + adjustedOther)
+
+      	let adjustedMoneyOut = adjustedHousing + adjustedFood + adjustedTransport + yearlySavings + adjustedLeisure + adjustedOther + totalTax + yearlyDebt;
+
+      	let obj = {
+
+      		name: formData.planName,
+      		currentStateAbbr: formData.currentState,
+      		futureStateAbbr: formData.futureState,
+      		currentStateLong: currentState,
+      		futureStateLong: futureState,
+      		currentStateData: currentCostData,
+      		futureStateData: futureCostData,
+      		yearlyIncome: yearlyIncome,
+      		yearlyOtherIncome: yearlyOtherIncome,
+      		moneyIn: moneyIn,
+      		moneyIn_tax: moneyIn - totalTax,
+      		yearlyHousing: yearlyHousing,
+      		yearlyFood: yearlyFood,
+      		yearlyTransport: yearlyTransport,
+      		yearlySavings: yearlySavings,
+      		yearlyLeisure: yearlyLeisure,
+      		yearlyOther: yearlyOther,
+      		moneyOut: moneyOut,
+      		moneyOut_tax: moneyOut - totalTax,
+      		adjustedFood: adjustedFood,
+      		adjustedHousing: adjustedHousing,
+      		adjustedTransport: adjustedTransport,
+      		adjustedLeisure: adjustedLeisure,
+      		adjustedOther: adjustedOther,
+      		adjustedMoneyOut: adjustedMoneyOut,
+      		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax
+
+      	}
+
+      	futureArray.push(obj);
+      	res.json(obj);
 
     })
     .catch((error)=>{
@@ -220,12 +424,18 @@ app.post("/processFormData", (req, res) => {
     })
 })
 
-
 //get function to get array of futures
 app.get('/futures-array', (req, res) => {
     res.send(futureArray);
 });
 
 
+
+
 app.listen(4000);
+
+
+
+
+
 
