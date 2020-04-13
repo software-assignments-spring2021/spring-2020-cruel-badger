@@ -37,11 +37,24 @@ import axios from "axios";
 
 
 
+
 function renderCard(name, state, index) {
+
+// function renderCard(name, state) {
+
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('deleted');
+    alert("Future has been deleted");
+
+  }
+
+
+
   return (
      <div className="card">
           <h3 className="title">{name}</h3>
-          <button className="btn" ><i className="fa fa-trash"></i></button>
+          <button onClick={handleClick} className="btn" ><i className="fa fa-trash"></i></button>
           <div className="bar">
           <div className="emptybar"></div>
 
@@ -89,7 +102,8 @@ function Dashboard(props) {
 
 
       <div className="container">
-          {formObjects.map((obj, index) => (renderCard(obj.name, obj.state, index)))}
+          {formObjects.map((obj, index) => (renderCard(obj.name, obj.futureStateAbbr, index)))}
+          //{formObjects.map(obj => (renderCard(obj.name, obj.futureStateAbbr)))}
       </div>
 
 
