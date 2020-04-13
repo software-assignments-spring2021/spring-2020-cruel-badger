@@ -7,7 +7,9 @@ const Step1 = (props) => {
 	return (
 		<div>
 			<h2 className="stepTitle">Intro</h2>
-
+			<h3>Name your future plan: </h3>
+			<input type="text" name="name" defaultValue={props.results.salary} onChange={props.handleChange}/> 
+			<br/>
 			<br/>
 			<h3>What state will you be in?</h3>
 			<select name="state" defaultValue={props.results.state} onChange={props.handleChange}>

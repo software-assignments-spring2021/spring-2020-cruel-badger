@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const app = express();
 
+
 //dummy data for testing
 let futureArray = [{  name: "Go to Grad school", 
                       state: "IL", 
@@ -36,6 +37,7 @@ let futureArray = [{  name: "Go to Grad school",
                     }
 ];
 
+
 let plans = []
 
 app.use(cors());
@@ -51,6 +53,10 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
 	res.send("This is the backend");
+})
+
+app.get("/dashboard", (req, res) => {
+	res.json(plans)
 })
 
 
@@ -204,6 +210,8 @@ app.post("/processFormData", (req, res) => {
       				};
       	console.log(formObj);
       	res.json(formObj)
+
+      	plans.push(formObj)
 
 
     })

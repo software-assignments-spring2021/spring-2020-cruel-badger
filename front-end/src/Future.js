@@ -111,13 +111,7 @@ const Future = (props) => {
                 <a className="future-close" onClick={close}>
                   &times;
                 </a>
-                <div className="button-header"> Name Your Future </div>
-                <div className="button-content">
-                  {" "}
-                 <form className="button-field">
-                  <input placeholder="Future Name" type="text"/>
-                </form>
-                </div>
+
                 <div className="button-actions">
                   <button className="future-save-button" onClick={() => {
                       console.log("modal closed ");
