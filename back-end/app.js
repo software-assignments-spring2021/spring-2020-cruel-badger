@@ -378,7 +378,7 @@ app.post("/processFormData", (req, res) => {
 
       	let obj = {
 
-      		name: formData.planName,
+      		name: formData.name,
       		currentStateAbbr: formData.currentState,
       		futureStateAbbr: formData.futureState,
       		currentStateLong: currentState,
