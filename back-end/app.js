@@ -171,6 +171,7 @@ app.post("/processFormData", (req, res) => {
       					outFlow: moneyOut
       				};
       	console.log(formObj);
+      	res.json(formObj)
 
 
     })

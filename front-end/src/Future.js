@@ -32,7 +32,8 @@ const FutureSummary = ( props ) => {
 }
 
 
-const Future = () => {
+const Future = (props) => {
+    console.log(props)
     return (
       <>
         <Header/>

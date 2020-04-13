@@ -71,6 +71,10 @@ function processFutures() {
 
 
 function Dashboard(props) {
+
+  console.log(props);
+
+
   // const [cardTitle, setCardTitle] = useState("");
 	return (
 		  <div className="App">
