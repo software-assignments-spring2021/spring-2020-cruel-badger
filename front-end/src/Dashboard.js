@@ -71,14 +71,13 @@ function renderCard(name, state) {
 
 
 function Dashboard(props) {
-  let [formObjects, setFormObjects] = useState([]);
-  //console.log(props); 
+  let [formObjects, setFormObjects] = useState([]); 
   useEffect(() => {
     axios.get("/futures-array").then(function(response) {
       setFormObjects(response.data);
     });
   });
-
+  console.log(props);
 
   // const [cardTitle, setCardTitle] = useState("");
 	return (

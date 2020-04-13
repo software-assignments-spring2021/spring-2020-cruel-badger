@@ -36,6 +36,7 @@ let futureArray = [{  name: "Go to Grad school",
                     }
 ];
 
+let plans = []
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
