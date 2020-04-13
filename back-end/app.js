@@ -118,14 +118,6 @@ let cost_data = cost_json.data
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-	console.log("In middleware")
-	console.log(req.path);
-	console.log(plans);
-	next();
-
-})
-
 
 app.get("/", (req, res) => {
 	res.send("This is the backend");
