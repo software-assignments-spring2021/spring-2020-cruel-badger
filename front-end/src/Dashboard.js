@@ -72,7 +72,7 @@ function renderCard(name, state) {
 
 function Dashboard(props) {
 
-  console.log(props);
+  console.log(props.plans);
 
 
   // const [cardTitle, setCardTitle] = useState("");
