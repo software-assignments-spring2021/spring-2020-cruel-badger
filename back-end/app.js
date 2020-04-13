@@ -328,7 +328,7 @@ app.post("/processFormData", (req, res) => {
       console.log(`MONEY GOING OUT PER YEAR: ${moneyOut}`)
 
 
-      //ADDED BY SKYE
+      
       // let formObj = {	name: formData.planName, 
       // 					state: formData.state, 
       // 					income: yearlyIncome,
