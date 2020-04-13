@@ -38,10 +38,19 @@ import axios from "axios";
 
 
 function renderCard(name, state) {
+
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('deleted');
+    alert("Future has been deleted");
+
+  }
+
+
   return (
      <div className="card">
           <h3 className="title">{name}</h3>
-          <button className="btn" ><i className="fa fa-trash"></i></button>
+          <button onClick={handleClick} className="btn" ><i className="fa fa-trash"></i></button>
           <div className="bar">
           <div className="emptybar"></div>
 
