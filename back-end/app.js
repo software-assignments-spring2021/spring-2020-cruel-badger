@@ -44,9 +44,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-	console.log("In middleware")
-	console.log(req.path);
-	console.log(req.body);
+	// console.log("In middleware")
+	// console.log(req.path);
+	// console.log(req.body);
 	next();
 })
 
@@ -201,7 +201,7 @@ app.post("/processFormData", (req, res) => {
 
 
       //ADDED BY SKYE
-      let formObj = {	name: formData.planName, 
+      let formObj = {	name: formData.name, 
       					state: formData.state, 
       					income: yearlyIncome,
       					tax: totalTax,
@@ -211,7 +211,7 @@ app.post("/processFormData", (req, res) => {
       	console.log(formObj);
       	res.json(formObj)
 
-      	plans.push(formObj)
+      	futureArray.push(formObj)
 
 
     })
