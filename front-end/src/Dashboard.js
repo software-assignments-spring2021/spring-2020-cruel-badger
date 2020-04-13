@@ -37,7 +37,7 @@ import axios from "axios";
 
 
 
-function renderCard(name, state) {
+function renderCard(name, state, index) {
   return (
      <div className="card">
           <h3 className="title">{name}</h3>
@@ -49,7 +49,7 @@ function renderCard(name, state) {
 
           <div className="filledbar"></div>
           </div>
-          <a href="/view-future">
+          <a href={"/view-future/" + index}>
           <div className="circle">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
               <circle className="stroke" cx="60" cy="60" r="50"/>
@@ -89,7 +89,7 @@ function Dashboard(props) {
 
 
       <div className="container">
-          {formObjects.map(obj => (renderCard(obj.name, obj.state)))}
+          {formObjects.map((obj, index) => (renderCard(obj.name, obj.state, index)))}
       </div>
 
 
