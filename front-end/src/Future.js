@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Future.css';
 import Header from './header.js';
 import Chart from "react-google-charts";
 import Popup from "reactjs-popup";
+import axios from "axios";
 
 const FutureOverview = ( props ) => {
   return (
@@ -32,8 +33,15 @@ const FutureSummary = ( props ) => {
 }
 
 
-const Future = (props) => {
-    console.log(props)
+const Future = () => {
+    let [pieData, setPieData] = useState([]);
+    let [barData, setBarData] = useState([]);
+    useEffect(() => {
+      axios.get("/futureDataTest").then(function(response) {
+        setPieData(response.data.pieChart);
+        setBarData(response.data.barChart);
+      });
+    });
     return (
       <>
         <Header/>
@@ -47,14 +55,7 @@ const Future = (props) => {
                 height={'300px'}
                 chartType="PieChart"
                 loader={<div>Loading Chart</div>}
-                data={[
-                  ['Expense', 'Dollars'],
-                  ['Food', 2000],
-                  ['Rent', 4000],
-                  ['Commute', 2500],
-                  ['Entertainment', 1500],
-                  ['Utilities', 350],
-                ]}
+                data={pieData}
                 options={{
                   chartArea: {left: '5%', right: '5%',},
                   //backgroundColor: 'red',
@@ -71,21 +72,7 @@ const Future = (props) => {
                 height={'300px'}
                 chartType="ColumnChart"
                 loader={<div>Loading Chart</div>}
-                data={[
-                  ['Month', 'In', 'Out'],
-                  ['Jan', 10000, 8000],
-                  ['Feb', 10000, 4000],
-                  ['Mar', 10000, 11000],
-                  ['Apr', 10000, 3000],
-                  ['May', 10000, 5000],
-                  ['June', 10000, 8000],
-                  ['July', 10000, 4650],
-                  ['Aug', 10000, 6000],
-                  ['Sept', 10000, 3470],
-                  ['Oct', 10000, 2340],
-                  ['Nov', 10000, 5232],
-                  ['Dec', 10000, 7234],
-                ]}
+                data={barData}
                 options={{
                   chartArea: {left: '10%', right: '12%',},
                   chart: {title: 'Income In vs. Out'},
