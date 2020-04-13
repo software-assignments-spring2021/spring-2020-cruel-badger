@@ -1,16 +1,16 @@
 const app = require("../app");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
+
 const {expect} = chai;
 chai.use(chaiHttp);
 
 describe("Form results", () => {
-	it("Should return an object with several data properties", done => {
+	it("Should return a form object with text field properties", done => {
 		chai
 			.request(app)
             .post('/processFormData')
             .send({
-
 		      		name: "Work in WI",
 		      		currentStateAbbr: "NY",
 		      		futureStateAbbr: "WI",
@@ -27,6 +27,7 @@ describe("Form results", () => {
 		            "miscCost": "104.8000"
 		        })
             .end((err, res) =>{
+            	expect(res).to.be.a('object');
                 expect(res).to.be.a('string');
                 done();
 	});
@@ -36,7 +37,6 @@ describe("Form results", () => {
     		.request(app)
             .post('/processFormData')
             .send({
-
 		      		name: null,
 		      		currentStateAbbr: null,
 		      		futureStateAbbr: null,
@@ -62,7 +62,6 @@ describe("Form results", () => {
     		.request(app)
             .post('/processFormData')
             .send({
-
 		      		name: "Work in WI",
 		      		currentStateAbbr: "NY",
 		      		futureStateAbbr: "WI",
@@ -82,5 +81,4 @@ describe("Form results", () => {
     			expect(res).to.have.status(200);
                 done();
     });
-
 });
