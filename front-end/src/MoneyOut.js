@@ -19,6 +19,7 @@ function MoneyOut(props) {
 			From $<input type="text" name="foodLow" onChange={props.handleChange} defaultValue={props.results.foodLow}/> To $<input type="text" name="foodHigh" onChange={props.handleChange} defaultValue={props.results.foodHigh}/> <br/>
 			Daily:<input type="radio" name="foodType" defaultChecked={props.results.foodType === "daily" ? true : false} onChange={props.handleChange} value="daily" />
 			Weekly:<input type="radio" name="foodType" defaultChecked={props.results.foodType === "weekly" ? true : false} onChange={props.handleChange} value="weekly" />
+			Monthly:<input type="radio" name="foodType" defaultChecked={props.results.foodType === "monthly" ? true : false} onChange={props.handleChange} value="monthly" />
 
 			<br/>
 			<br/>
