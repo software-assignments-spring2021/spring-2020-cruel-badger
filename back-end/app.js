@@ -213,7 +213,10 @@ app.post("/processFormData", (req, res) => {
 	}
 	else if (formData.foodType === "weekly") {
 		yearlyFood = aveFood * 52
+	} else if (formData.foodType === "monthly") {
+		yearlyFood = aveFood * 12;
 	}
+
 	console.log(`Yearly food costs: ${yearlyFood}`)
 
 	let aveTransport = (parseFloat(formData.transportLow) + parseFloat(formData.transportHigh)) / 2; 
@@ -252,13 +255,19 @@ app.post("/processFormData", (req, res) => {
 	else if (formData.leisureType === "weekly") {
 		yearlyLeisure = aveLeisure * 52;
 	}
+	else if (formData.leisureType === "monthly") {
+		yearlyLeisure = aveLeisure * 12;
+	}
 
 	console.log(`Yearly leisure costs: ${yearlyLeisure}`)
 
 
 	let aveOther = (parseFloat(formData.otherLow) + parseFloat(formData.otherHigh)) / 2;
 	let yearlyOther = 0;
-	if (formData.otherType === "weekly") {
+	if (formData.otherType === "daily") {
+		yearlyOther = aveOther * 365
+	}
+	else if (formData.otherType === "weekly") {
 		yearlyOther = aveOther * 52
 	}
 	else if (formData.otherType === "monthly") {
