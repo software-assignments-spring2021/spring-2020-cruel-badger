@@ -8,6 +8,10 @@ In our Minimum Viable Product, we want to be able to input financial data and ge
 ## __History:__
 This project came to be as we, a group of seniors at NYU, began planning for our futures after graduation. The real world comes with real responsibilities, and we wanted to come up with a a solution to ease that transition. 
 
+## __Commands For Running The Project:__
+Inside front-end: npm start    -- will run on port 3000
+Inside back-end: node app.js   -- will run on port 4000
+
 
 ### Contributing.MD:
 https://github.com/nyu-software-engineering/spring-2020-cruel-badger/blob/master/CONTRIBUTING.md
