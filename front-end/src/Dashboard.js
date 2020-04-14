@@ -46,10 +46,6 @@ function renderCard(name, state, index) {
     e.preventDefault();
     console.log('deleted');
     alert("Future has been deleted");
-    app.get('/', function (req, res) {
-      res.send(index);
-})
-    //send index to backend through app.get method
 
   }
 
