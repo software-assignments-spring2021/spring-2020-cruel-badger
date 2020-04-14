@@ -7,12 +7,25 @@ import axios from "axios";
 import { useParams } from "react-router";
 
 const FutureOverview = ( props ) => {
-  return (
-    <futureOverViewBox>
-      <h1 className="overViewH1"> {props.heading} </h1>
-      <p className="overViewP"> {props.paragraph} </p>
-    </futureOverViewBox>
-  )
+  if(props.status == -1) {
+    return (
+      <futureOverViewBoxBad>
+        <h1 className="overViewH1">"This Plan Doesn't Look Good!"</h1>
+      </futureOverViewBoxBad>
+    )
+  } else if (props.status == 0) {
+    return (
+      <futureOverViewBoxNeutral>
+        <h1 className="overViewH1">"This Plan Could Be Better, But Not Bad!"</h1>
+      </futureOverViewBoxNeutral>
+    )
+  } else {
+    return (
+      <futureOverViewBoxGood>
+        <h1 className="overViewH1">Great Job! This is a Great Plan!</h1>
+      </futureOverViewBoxGood>
+    )
+  }
 }
 
 // const FutureDiagram = ( props ) => {
@@ -25,12 +38,90 @@ const FutureOverview = ( props ) => {
 // }
 
 const FutureSummary = ( props ) => {
-  return (
-    <futureSummaryBox>
-      <h1 className="summaryH1"> {props.heading} </h1>
-        <p className="summaryP">{props.paragraph} </p>
-    </futureSummaryBox>
-  )
+  if (props.heading === "rec") {
+    //if positive cashflow
+    if (props.status == 1) {
+      //if positive cash flow but future state is more expensive
+      if (props.stateDiff[2] > 5) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Recommendations:</h1>
+              <p className="summaryP">{"This plan is looking pretty good! You have a positive cash flow, however you should watch out for the higher costs in " + props.stateDiff[0] + "."}</p> 
+              <p className="summaryP">{props.stateDiff[0] + " is " + props.stateDiff[2] + "% more expensive to live in compared to " + props.stateDiff[1] + "."}</p>
+          </futureSummaryBox>
+        )
+      } else if (props.stateDiff[2] < -5) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Recommendations:</h1>
+              <p className="summaryP">{"This plan is looking pretty good! You have a positive cash flow, and " + props.stateDiff[0] + " is cheaper to live in!."}</p> 
+              <p className="summaryP">{props.stateDiff[0] + " is " + (-1 * props.stateDiff[2]) + "% cheaper to live in compared to " + props.stateDiff[1] + "."}</p>
+          </futureSummaryBox>
+        )
+      } else if (props.status == 0) {
+        //if neutral cash flow but future state is more expensive
+        if (props.stateDiff[2] > 5) {
+          return (
+            <futureSummaryBox>
+              <h1 className="summaryH1">Recommendations:</h1>
+                <p className="summaryP">{"This plan is okay. Your cash flow is close to 0, so you should watch out for the higher costs in " + props.stateDiff[0] + "."}</p> 
+                <p className="summaryP">{props.stateDiff[0] + " is " + props.stateDiff[2] + "% more expensive to live in compared to " + props.stateDiff[1] + "."}</p>
+            </futureSummaryBox>
+          )
+        } else if (props.stateDiff[2] < -5) {
+          return (
+            <futureSummaryBox>
+              <h1 className="summaryH1">Recommendations:</h1>
+                <p className="summaryP">{"This plan is okay. Your cash flow is close to 0, however because " + props.stateDiff[0] + " is cheaper to live in, your costs will be lower."}</p> 
+                <p className="summaryP">{props.stateDiff[0] + " is " + (-1 * props.stateDiff[2]) + "% cheaper to live in compared to " + props.stateDiff[1] + "."}</p>
+            </futureSummaryBox>
+          )
+        }
+    } else {
+      //if negative cash flow but future state is more expensive
+      if (props.stateDiff[2] > 5) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Recommendations:</h1>
+              <p className="summaryP">{"Your plan needs work. Your cash flow is already negative, so you should watch out for the higher costs in " + props.stateDiff[0] + "."}</p> 
+              <p className="summaryP">{props.stateDiff[0] + " is " + props.stateDiff[2] + "% more expensive to live in compared to " + props.stateDiff[1] + "."}</p>
+          </futureSummaryBox>
+        )
+      } else if (props.stateDiff[2] < -5) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Recommendations:</h1>
+              <p className="summaryP">{"Your plan needs work. Your cash flow is negative, however because " + props.stateDiff[0] + " is cheaper to live in, your costs will be lower."}</p> 
+              <p className="summaryP">{props.stateDiff[0] + " is " + (-1 * props.stateDiff[2]) + "% cheaper to live in compared to " + props.stateDiff[1] + "."}</p>
+          </futureSummaryBox>
+        )
+      }
+    }
+  }
+  if (props.heading === "outlook") {
+    if (props.status == 1) {
+      return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan is good! You have a positive cash flow, however you should watch out for the higher costs in " + props.stateDiff[0] + "."}</p> 
+          </futureSummaryBox>
+        )
+      } else if (props.status == 0) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan could be better. You have a positive cash flow, however you should watch out for the higher costs in " + props.stateDiff[0] + "."}</p> 
+          </futureSummaryBox>
+        )
+    } else {
+      return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan does not look great. You have a positive cash flow, however you should watch out for the higher costs in " + props.stateDiff[0] + "."}</p> 
+          </futureSummaryBox>
+      )
+    }
+  }
 }
 
 
@@ -38,18 +129,24 @@ const Future = (props) => {
   let futureID = useParams();
     let [pieData, setPieData] = useState([]);
     let [barData, setBarData] = useState([]);
+    let [cashFlow, setCashFlow] = useState(0);
+    let [financialIndicator, setFinancialIndicator] = useState(0);
+    let [stateCost, setStateCost] = useState([]);
     useEffect(() => {
       axios.get("/futureArrayTest", {params: {id: futureID}}).then(function(response) {
         console.log(response.data);
         setPieData(response.data.pieChart);
         setBarData(response.data.barChart);
+        setCashFlow(response.data.cashFlow);
+        setFinancialIndicator(response.data.financialIndicator);
+        setStateCost(response.data.stateCost);
       });
     }, []);
     return (
       <>
         <Header/>
         <futureOverall>
-          <FutureOverview heading="Your Future Looks Great!" />
+          <FutureOverview status={financialIndicator}/>
         </futureOverall>
         <futureGraph>
           <futureDiagramBox>
@@ -80,7 +177,7 @@ const Future = (props) => {
                   chartArea: {left: '10%', right: '12%',},
                   chart: {title: 'Income In vs. Out'},
                   vAxis: { title: 'Money', },
-                  hAxis: { title: 'Month' ,},
+                  //hAxis: { title: 'Cash Flow' ,},
                   //backgroundColor: 'yellow',
                 }}
                 // For tests
@@ -89,10 +186,10 @@ const Future = (props) => {
           </futureDiagramBox>
         </futureGraph>
         <futureSummary>
-          <FutureSummary heading="Recommendations" paragraph="Great job! You have more money coming in than you're spending! The cost of living in New York is higher than the cost of living in California so watch out on those expenses!" />
+          <FutureSummary heading="rec" status={financialIndicator} stateDiff={stateCost} />
         </futureSummary>
         <futureSummary>
-          <FutureSummary heading="Outlook on Debt" paragraph="You have no debt! You have saved a month of expenses. Good job!" />
+          <FutureSummary heading="outlook" status={financialIndicator} cashFlows={cashFlow}/>
         </futureSummary>
         <futureSummary>
           <Popup trigger={<button className="future-button"> Save Future </button>} modal>

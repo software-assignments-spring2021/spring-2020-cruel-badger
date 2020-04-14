@@ -41,9 +41,31 @@ futureSummary {
 }
 
 /*boxes within the big sections*/
-futureOverViewBox {
+futureOverViewBoxGood {
   flex: auto;
   background-color: green;
+  /*border: 1px dotted green;*/
+  font-family: 'Concert One', cursive;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 4px 8px 20px #a1a1a1;
+}
+
+futureOverViewBoxNeutral {
+  flex: auto;
+  background-color: yellow;
+  /*border: 1px dotted green;*/
+  font-family: 'Concert One', cursive;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 4px 8px 20px #a1a1a1;
+}
+
+futureOverViewBoxBad {
+  flex: auto;
+  background-color: red;
   /*border: 1px dotted green;*/
   font-family: 'Concert One', cursive;
   text-align: center;
