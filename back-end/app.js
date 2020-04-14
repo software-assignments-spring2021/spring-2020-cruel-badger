@@ -123,9 +123,9 @@ app.get("/", (req, res) => {
 	res.send("This is the backend");
 })
 
-app.get("/dashboard", (req, res) => {
-	res.json(plans)
-})
+// app.get("/dashboard", (req, res) => {
+// 	res.json(plans)
+// })
 
 let abbrToState = (abbr) => {
 	var states = [
@@ -404,11 +404,11 @@ app.post("/processFormData", (req, res) => {
       		adjustedOther: adjustedOther,
       		adjustedMoneyOut: adjustedMoneyOut,
       		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax
-
       	}
 
       	futureArray.push(obj);
-      	res.json(obj);
+      	let id = futureArray.length-1;
+      	res.json({future: obj, futureID: id});
 
     })
     .catch((error)=>{
@@ -424,7 +424,54 @@ app.get('/futures-array', (req, res) => {
 app.get('/futureArrayTest', (req, res) => {
 	let index = JSON.parse(req.query.id);
 	console.log(index.id);
-    res.send(futureArray[index.id]);
+	let future = futureArray[index.id];
+	//console.log(((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100).toFixed(2));
+
+	//get money in vs money out flow
+	let moneyFlow = future.moneyIn_tax - future.adjustedMoneyOut_tax;
+
+	//financial status determines between -1, 0, 1 how well the plan will do
+	let financialStatus = 0;
+	if (moneyFlow > -500 && moneyFlow < 500) {
+		financialStatus = 0;
+	} else if (moneyFlow <= -500) {
+		financialStatus = -1;
+	}
+	else {
+		financialStatus = 1;
+	}
+
+	//get the difference of the cost index between states
+	let costDiff = ((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100.000).toFixed(2);
+	//console.log(costDiff);
+	//get max expense
+	// let expenses = [['Food', future.adjustedFood],
+	// 				['Rent', future.adjustedHousing],
+	// 				['Commute', future.adjustedTransport], 
+	// 				['Leisure', future.adjustedLeisure], 
+	// 				['Misc.', future.adjustedOther]];
+	// come back to this later
+	// let maxExpense = expenses.map(function() { return o.y; })
+
+	const body = {
+		cashFlow: moneyFlow,
+		financialIndicator: financialStatus,
+		stateCost: costDiff,
+		currState: future.currentStateAbbr,
+		futureState: future.futureStateAbbr, 
+		pieChart: [
+			['Expense', 'Dollars'],
+	        ['Food', future.adjustedFood], 
+	        ['Rent', future.adjustedHousing],
+	        ['Commute', future.adjustedTransport],
+	        ['Leisure', future.adjustedLeisure],
+	        ['Misc.', future.adjustedOther],
+		],
+		barChart: [['', 'In', 'Out'],
+                  ['Cash Flow', future.moneyIn_tax, future.adjustedMoneyOut_tax],
+        ],
+	}
+    res.send(body);
 });
 
 //testing future results

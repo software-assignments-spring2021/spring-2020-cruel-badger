@@ -27,7 +27,7 @@ ReactDOM.render(
 		<Route path="/dashboard" component={Dashboard}/>
 		<Route path="/about" component={About}/>
 		<Route path="/view-future/:id" component={Future}/>
-		//<Route path="/view-future" component={Future}/>
+		{/*<Route path="/view-future" component={Future}/>*/}
 		<Route path="/log-in" component={Login}/>
 		<Route path="/sign-up" component={Signup}/>
 	</BrowserRouter>,
