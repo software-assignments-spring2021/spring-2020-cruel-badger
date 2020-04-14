@@ -184,6 +184,7 @@ let abbrToState = (abbr) => {
     for (let i = 0; i < states.length; i++) {
     	if (abbr === states[i][1]) return states[i][0];
     }
+    return "Invalid state abbr"
     
 }
 
