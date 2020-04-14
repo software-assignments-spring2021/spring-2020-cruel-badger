@@ -132,3 +132,177 @@ describe("Form results", () => {
         });
     });
 });
+
+
+
+describe("Correct Form Calculations", () => {
+
+	//-----Food Calculations----
+	it("Should return correct average food calculations if done daily", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveFood: 10,foodType: daily": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyFood, "3650");
+				done();
+			});
+
+	});
+
+	it("Should return correct average food calculations if done weekly", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveFood: 10,foodType: weekly": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyFood, "520");
+				done();
+			});
+
+	});
+	it("Should return correct average food calculations if done monthly", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveFood: 10,foodType: monthly": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyFood, "120");
+				done();
+			});
+
+	});
+
+
+	//-----Transportation Calculations----
+	it("Should return correct average transportation calculations if done daily", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveTransport: 10,transportType: daily": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyTransport, "3650");
+				done();
+			});
+
+	});	
+	it("Should return correct average transportation calculations if done weekly", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveTransport: 10,transportType: weekly": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyTransport, "520");
+				done();
+			});
+
+	});
+	it("Should return correct average transportation calculations if done monthly", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveTransport: 10,transportType: monthly": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyTransport, "120");
+				done();
+			});
+
+	});
+
+
+	//----Savings Calculations----
+	it("Should return correct average savings calculations if done daily", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveSavings: 10, savingsType: daily": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlySavings, "3650");
+				done();
+			});
+
+	});
+	it("Should return correct average savings calculations if done weekly", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveSavings: 10, savingsType: weekly": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlySavings, "520");
+				done();
+			});
+
+	});
+	it("Should return correct average savings calculations if done monthly", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveSavings: 10, savingsType: monthly": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlySavings, "120");
+				done();
+			});
+
+	});
+
+
+	//----Leisure Calculations----
+	it("Should return correct average leisure calculations if done daily", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveLeisure: 10, leisureType: daily": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyLeisure, "3650");
+				done();
+			});
+
+	});
+	it("Should return correct average leisure calculations if done weekly", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveLeisure: 10, leisureType: weekly": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyLeisure, "520");
+				done();
+			});
+
+	});
+	it("Should return correct average leisure calculations if done monthly", done => {
+		chai
+			.request(app)
+			.post('/processFormData')
+			.send({
+				"aveLeisure: 10, leisureType: monthly": ""
+			})
+			.end((err, res) =>{
+				assert.equal(res.yearlyLeisure, "120");
+				done();
+			});
+
+	});
+
+});
