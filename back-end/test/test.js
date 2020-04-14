@@ -5,6 +5,53 @@ const chaiHttp = require("chai-http");
 const {expect} = chai;
 chai.use(chaiHttp);
 
+const assert = chai.assert
+
+describe("Make sure backend is running", () => {
+	it("Should return a 200", (done) => {
+		chai.request(app).get("/").end((err, res) => {
+			expect(res).to.have.status(200);
+			done();
+		})
+	})
+	it("Should print a boring statement", (done) => {
+		chai.request(app).get("/").end((err, res) => {
+			assert.equal(res.body, "This is the backend")
+			done();
+		})
+	})
+	
+})
+
+describe("State abbreviation", () => {
+	it("Should return the state for which it is an abbreviation", () => {
+		assert.equal(abbrToState("WI"), "Wisconsin");
+	})
+
+	it("Should return an error message when given invalid input", () => {
+		assert.equal(abbrToState("XY"), "Invalid state abbr");
+	})
+})
+
+describe("Form processing", () => {
+
+	it("Should return an error from axios", (done) => {
+		chai.request(app).post("/processFormData")
+		.send({"{}": ""}).end((err, res) => {
+			expect(res).to.have.status(400);
+			done()
+		})
+	})
+
+	it("Should return a proper object", (done) => {
+		chai.request(app).post("/processFormData")
+		.send({"{futureState: 'NY', salary: 100000}": ""}).end((err, res) => {
+			expect(res).to.be.json;
+			done()
+		})
+	})
+})
+
 describe("Form results", () => {
 	it("Should return a form object with text field properties", done => {
 		chai
@@ -25,7 +72,7 @@ describe("Form results", () => {
 		            "utilitiesCost": "108.7000",
 		            "transportationCost": "116.6000",
 		            "miscCost": "104.8000"
-		        })
+		        }})
             .end((err, res) =>{
             	expect(res).to.be.a('object');
                 expect(res).to.be.a('string');
@@ -51,7 +98,7 @@ describe("Form results", () => {
 		            "utilitiesCost": null,
 		            "transportationCost": null,
 		            "miscCost": null
-		        })
+		        }})
             .end((err, res) =>{
     			expect(res).to.have.status(400);
                 done();
@@ -76,7 +123,7 @@ describe("Form results", () => {
 		            "utilitiesCost": "108.7000",
 		            "transportationCost": "116.6000",
 		            "miscCost": "104.8000"
-		        })
+		        }})
             .end((err, res) =>{
     			expect(res).to.have.status(200);
                 done();
