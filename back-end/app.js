@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const app = express();
 
-let plans = []
+//let plans = []
 
 
 
@@ -417,6 +417,12 @@ app.get('/futureArrayTest', (req, res) => {
     res.send(futureArray[index.id]);
 });
 
+
+app.get('/Dashboard', (req, res) => {
+	const resultArray = futureArray.filter(obj => obj.index != index);
+	res.send(resultArray);
+});
+
 //testing future results
 app.get('/futureDataTest', (req, res) => {
     // assemble an object containing the data we want to send
@@ -455,15 +461,3 @@ app.listen(4000);
 
 
 
-let id 
-app.use(function (req, res, next) {
-	let id = name;
-	plans.map(item => (
-		..,
-		)
-
-plans.map(item => (
-	//if id is in the array, set it to false
-	)
-
-}
