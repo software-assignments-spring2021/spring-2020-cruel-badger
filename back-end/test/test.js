@@ -77,6 +77,7 @@ describe("Form results", () => {
             	expect(res).to.be.a('object');
                 expect(res).to.be.a('string');
                 done();
+        });
 	});
 
     it("Should send a Status Code 400 for required input missing", done => {
@@ -102,6 +103,7 @@ describe("Form results", () => {
             .end((err, res) =>{
     			expect(res).to.have.status(400);
                 done();
+        });
     });
 
     it("Should send a Status Code 200 for complete form", done => {
@@ -127,5 +129,6 @@ describe("Form results", () => {
             .end((err, res) =>{
     			expect(res).to.have.status(200);
                 done();
+        });
     });
 });

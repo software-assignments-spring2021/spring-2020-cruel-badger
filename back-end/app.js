@@ -184,6 +184,7 @@ let abbrToState = (abbr) => {
     for (let i = 0; i < states.length; i++) {
     	if (abbr === states[i][1]) return states[i][0];
     }
+    return "Invalid state abbr"
     
 }
 
@@ -213,7 +214,10 @@ app.post("/processFormData", (req, res) => {
 	}
 	else if (formData.foodType === "weekly") {
 		yearlyFood = aveFood * 52
+	} else if (formData.foodType === "monthly") {
+		yearlyFood = aveFood * 12;
 	}
+
 	console.log(`Yearly food costs: ${yearlyFood}`)
 
 	let aveTransport = (parseFloat(formData.transportLow) + parseFloat(formData.transportHigh)) / 2; 
@@ -252,13 +256,19 @@ app.post("/processFormData", (req, res) => {
 	else if (formData.leisureType === "weekly") {
 		yearlyLeisure = aveLeisure * 52;
 	}
+	else if (formData.leisureType === "monthly") {
+		yearlyLeisure = aveLeisure * 12;
+	}
 
 	console.log(`Yearly leisure costs: ${yearlyLeisure}`)
 
 
 	let aveOther = (parseFloat(formData.otherLow) + parseFloat(formData.otherHigh)) / 2;
 	let yearlyOther = 0;
-	if (formData.otherType === "weekly") {
+	if (formData.otherType === "daily") {
+		yearlyOther = aveOther * 365
+	}
+	else if (formData.otherType === "weekly") {
 		yearlyOther = aveOther * 52
 	}
 	else if (formData.otherType === "monthly") {
@@ -417,6 +427,35 @@ app.get('/futureArrayTest', (req, res) => {
     res.send(futureArray[index.id]);
 });
 
+//testing future results
+app.get('/futureDataTest', (req, res) => {
+    // assemble an object containing the data we want to send
+    const body = {
+        pieChart: [
+	        ['Expense', 'Dollars'],
+	        ['Food', 2000], ['Rent', 4000],
+	        ['Commute', 2500],
+	        ['Entertainment', 1500],
+	        ['Utilities', 350],
+        ],
+        barChart: [['Month', 'In', 'Out'],
+                  ['Jan', 10000, 8000],
+                  ['Feb', 10000, 4000],
+                  ['Mar', 10000, 11000],
+                  ['Apr', 10000, 3000],
+                  ['May', 10000, 5000],
+                  ['June', 10000, 8000],
+                  ['July', 10000, 4650],
+                  ['Aug', 10000, 6000],
+                  ['Sept', 10000, 3470],
+                  ['Oct', 10000, 2340],
+                  ['Nov', 10000, 5232],
+                  ['Dec', 10000, 7234],]
+
+    }
+    // send the response as JSON text to the client
+    res.json(body)
+});
 
 app.get('/Dashboard', (req, res) => {
 	const resultArray = futureArray.filter(obj => obj.index != index);
