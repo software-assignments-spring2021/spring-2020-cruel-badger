@@ -394,11 +394,11 @@ app.post("/processFormData", (req, res) => {
       		adjustedOther: adjustedOther,
       		adjustedMoneyOut: adjustedMoneyOut,
       		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax
-
       	}
 
       	futureArray.push(obj);
-      	res.json(obj);
+      	let id = futureArray.length-1;
+      	res.json({future: obj, futureID: id});
 
     })
     .catch((error)=>{
@@ -415,6 +415,7 @@ app.get('/futureArrayTest', (req, res) => {
 	let index = JSON.parse(req.query.id);
 	console.log(index.id);
 	let future = futureArray[index.id];
+	//console.log(((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100).toFixed(2));
 
 	//get money in vs money out flow
 	let moneyFlow = future.moneyIn_tax - future.adjustedMoneyOut_tax;
@@ -431,8 +432,8 @@ app.get('/futureArrayTest', (req, res) => {
 	}
 
 	//get the difference of the cost index between states
-	let costDiff = ((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100).toFixed(2);
-	
+	let costDiff = ((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100.000).toFixed(2);
+	//console.log(costDiff);
 	//get max expense
 	// let expenses = [['Food', future.adjustedFood],
 	// 				['Rent', future.adjustedHousing],
@@ -445,7 +446,9 @@ app.get('/futureArrayTest', (req, res) => {
 	const body = {
 		cashFlow: moneyFlow,
 		financialIndicator: financialStatus,
-		stateCost: [future.currentStateAbbr, future.futureStateAbbr, costDiff],
+		stateCost: costDiff,
+		currState: future.currentStateAbbr,
+		futureState: future.futureStateAbbr, 
 		pieChart: [
 			['Expense', 'Dollars'],
 	        ['Food', future.adjustedFood], 

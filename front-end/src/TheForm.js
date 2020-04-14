@@ -41,8 +41,8 @@ const TheForm = (props) => {
     		console.log(response);
 
     		history.push({
-				pathname: '/view-future',
-				state: { data: response.data }
+				pathname: "/view-future/" + response.data.futureID,
+				state: { data: response.data.future }
 			})
 
     	}).catch(error => {
