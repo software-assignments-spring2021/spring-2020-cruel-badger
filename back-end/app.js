@@ -329,17 +329,7 @@ app.post("/processFormData", (req, res) => {
 
 
       
-      // let formObj = {	name: formData.planName, 
-      // 					state: formData.state, 
-      // 					income: yearlyIncome,
-      // 					tax: totalTax,
-      // 					inFlow: moneyIn,
-      // 					outFlow: moneyOut
-      // 				};
-      // 	console.log(formObj);
-      // 	res.json(formObj)
-
-      // 	plans.push(formObj)
+     
 
 
       	let currentState = abbrToState(formData.currentState);
@@ -421,6 +411,42 @@ app.get('/futures-array', (req, res) => {
     res.send(futureArray);
 });
 
+app.get('/futureArrayTest', (req, res) => {
+	let index = JSON.parse(req.query.id);
+	console.log(index.id);
+    res.send(futureArray[index.id]);
+});
+
+//testing future results
+app.get('/futureDataTest', (req, res) => {
+    // assemble an object containing the data we want to send
+    const body = {
+        pieChart: [
+	        ['Expense', 'Dollars'],
+	        ['Food', 2000], ['Rent', 4000],
+	        ['Commute', 2500],
+	        ['Entertainment', 1500],
+	        ['Utilities', 350],
+        ],
+        barChart: [['Month', 'In', 'Out'],
+                  ['Jan', 10000, 8000],
+                  ['Feb', 10000, 4000],
+                  ['Mar', 10000, 11000],
+                  ['Apr', 10000, 3000],
+                  ['May', 10000, 5000],
+                  ['June', 10000, 8000],
+                  ['July', 10000, 4650],
+                  ['Aug', 10000, 6000],
+                  ['Sept', 10000, 3470],
+                  ['Oct', 10000, 2340],
+                  ['Nov', 10000, 5232],
+                  ['Dec', 10000, 7234],]
+
+    }
+    // send the response as JSON text to the client
+    res.json(body)
+});
+
 
 
 
@@ -429,5 +455,15 @@ app.listen(4000);
 
 
 
+let id 
+app.use(function (req, res, next) {
+	let id = name;
+	plans.map(item => (
+		..,
+		)
 
+plans.map(item => (
+	//if id is in the array, set it to false
+	)
 
+}
