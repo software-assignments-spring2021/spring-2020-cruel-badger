@@ -1,3 +1,4 @@
+var dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
 
 
@@ -52,6 +53,6 @@ const User = new mongoose.Schema({
 mongoose.model("User", User);
 
 
-mongoose.connect("mongodb+srv://admin:cruelbadger2020@broke-millennial-vnlui.mongodb.net/test?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGOATLAS_URL);
 
 
