@@ -3,6 +3,9 @@ const axios = require("axios");
 const cors = require("cors");
 const fs = require("fs");
 
+const port = process.env.PORT;
+require('./db.js')
+
 const app = express();
 
 let plans = []
@@ -512,7 +515,10 @@ app.get('/futureDataTest', (req, res) => {
 module.exports = app.listen(4000);
 
 
-
+// uncomment when ready for testing
+// app.listen(port, () => {
+//     console.log(`Server running on port ${port}`)
+// })
 
 
 
