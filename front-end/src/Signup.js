@@ -8,8 +8,10 @@ import {
     Button,
     Form,
     EmailInput,
-    Password
+    Password,
+    TextBox
   } from 'react-form-elements';
+
 
 
 function Signup() {
@@ -30,6 +32,13 @@ function Signup() {
 		       				name="emailAddress"
 		        			label="Email Address"
 		        			initialValue=""
+		      			/>
+
+		      			<TextBox
+		      				id="username"
+		      				name="username"
+		      				label ="Username"
+		      				initialValue=""
 		      			/>
 
 		      			<Password

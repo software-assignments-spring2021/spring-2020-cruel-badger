@@ -44,6 +44,7 @@ const Token = new mongoose.Schema({
 
 const User = new mongoose.Schema({
 	username: {type: String, required: true},
+	email: {type: String, required: true},
 	password: {type: String, required: true},
 	tokens: [Token],
 	plans: [Plan]
@@ -82,11 +83,7 @@ User.statics.findByCredentials = async (username, password) => {
 
 
 
-
-
-
-
-mongoose.model("User", User);
+module.exports = User = mongoose.model("User", User);
 
 
 mongoose.connect(process.env.MONGOATLAS_URL);

@@ -8,7 +8,8 @@ import {
     Button,
     Form,
     EmailInput,
-    Password
+    Password,
+    TextBox
   } from 'react-form-elements';
 
 
@@ -25,10 +26,10 @@ function Login() {
 		        		console.log('formValues', values)
 		      			}}
 	    			>
-						<EmailInput
-							id="emailAddress"
-		       				name="emailAddress"
-		        			label="Email Address"
+						<TextBox
+							id="username"
+		       				name="username"
+		        			label="Username"
 		        			initialValue=""
 		      			/>
 
