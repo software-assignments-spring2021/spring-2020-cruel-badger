@@ -86,6 +86,6 @@ User.statics.findByCredentials = async (username, password) => {
 mongoose.model("User", User);
 
 
-mongoose.connect(process.env.MONGOATLAS_URL);
+mongoose.connect(process.env.MONGOATLAS_URI);
 
 
