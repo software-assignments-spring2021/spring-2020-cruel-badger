@@ -3,7 +3,18 @@ const axios = require("axios");
 const cors = require("cors");
 const fs = require("fs");
 
-const port = process.env.PORT;
+const passport = require('passport');
+const passportJWT = require('passport-jwt');
+const JwtStrategy = passportJWT.Strategy;
+const ExtractJwt = passportJWT.ExtractJwt;
+
+
+const JWT_params = {
+    //secretOrKey: cfg.jwtSecret,
+    //jwtFromRequest: ExtractJwt.fromAuthHeader()
+};
+
+const port = process.env.PORT || 4000;
 require('./db.js')
 
 const app = express();
