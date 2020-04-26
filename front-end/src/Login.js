@@ -13,7 +13,7 @@ import {
   } from 'react-form-elements';
 
 
-function Login() {
+function Login(props) {
 	return(
 		<div className="loginpage">
 		<Header/>
@@ -21,27 +21,18 @@ function Login() {
 				<h1 id="loginh1">Login</h1>
 				<p id="loginaccess"> This will allow you to access your dashboard containing your saved future paths </p>
 				<div id="loginform">
-					<Form
-		      			onSubmit={values => {
-		        		console.log('formValues', values)
-		      			}}
-	    			>
-						<TextBox
-							id="username"
-		       				name="username"
-		        			label="Username"
-		        			initialValue=""
-		      			/>
+					<form action="/submit-login" method="POST">
 
-		      			<Password
-					        name="password"
-					        label="Password"
-					        initialValue=""
-		      			/>
-		      			<Button id="loginsubmit" href="/dashboard"><a id="logininside" href="/dashboard">Submit</a></Button>
-		      			
-		      			
-		      		</Form>
+					<p className="formstuff">Username:</p>
+					<input type="text" name="username" defaultValue="" /> 
+
+					<p className="formstuff">Password:</p>
+					<input type="password" name="password" defaultValue="" id="bottominput" /> 
+
+					<input type="submit" id="submit" name="Submit"/>
+
+					</form>
+
 				</div>
 
 				<p id="donthaveacct">Don't have an account? Sign up <a id="signuplink" href="/sign-up">here</a></p>

@@ -518,8 +518,12 @@ app.get('/futureDataTest', (req, res) => {
     res.json(body)
 });
 
+//GETTING SIGN UP DATA
+app.get('/submit-signup', (req, res) =>{
+	const username = req.body.username;
+	console.log(username);
 
-
+});
 
 // app.listen(4000);
 
