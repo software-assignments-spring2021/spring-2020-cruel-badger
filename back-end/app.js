@@ -517,15 +517,23 @@ app.get('/futureDataTest', (req, res) => {
 
 //GETTING SIGN UP DATA
 app.get('/submit-signup', passport.authenticate('jwt', { session : false }), (req, res) =>{
-	const username = req.body.username;
-	console.log(username);
+	
+  //const username = req.body.username;
+	//console.log(username);
+  console.log("submit-signup");
+	console.log(JSON.parse(Object.keys(req.body)[0]));
 
 });
 
+app.get('/submit-login', passport.authenticate('jwt', { session : false }), (req, res) =>{
+	
+  //const username = req.body.username;
+	//console.log(username);
+  console.log("submit-login");
+	console.log(JSON.parse(Object.keys(req.body)[0]));
+	res.redirect("/dashboard");
 
-
-
-
+});
 
 // app.listen(4000);
 

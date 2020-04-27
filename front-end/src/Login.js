@@ -1,19 +1,36 @@
 import ReactDOM from 'react-dom';
 import React, {Component}from 'react';
 import Header from "./header.js";
-
+import axios from "axios"
 
 import './Login.css';
-import {
-    Button,
-    Form,
-    EmailInput,
-    Password,
-    TextBox
-  } from 'react-form-elements';
 
 
 function Login(props) {
+	let state = {
+	    username: '',
+	    password: '',
+  	};
+
+  const handleChange = event => {
+  	const value = event.target.value;
+    state[event.target.name] = value;
+  }
+
+  const handleSubmit = event => {
+    // event.preventDefault();
+
+    const user = {
+      username: state.username,
+      password: state.password,
+    };
+
+	axios({"method":"POST", "url":"http://localhost:4000/submit-login", "headers":{"content-type": "application/x-www-form-urlencoded"
+		}, data: user}).then(res => {
+	        //console.log(res);
+	        //console.log(res.data);
+	})
+  }
 	return(
 		<div className="loginpage">
 		<Header/>
@@ -21,13 +38,13 @@ function Login(props) {
 				<h1 id="loginh1">Login</h1>
 				<p id="loginaccess"> This will allow you to access your dashboard containing your saved future paths </p>
 				<div id="loginform">
-					<form action="/submit-login" method="POST">
+					<form onSubmit={handleSubmit} action="/dashboard">
 
 					<p className="formstuff">Username:</p>
-					<input type="text" name="username" defaultValue="" /> 
+					<input type="text" name="username" defaultValue="" onChange={handleChange}/> 
 
 					<p className="formstuff">Password:</p>
-					<input type="password" name="password" defaultValue="" id="bottominput" /> 
+					<input type="password" name="password" defaultValue="" id="bottominput" onChange={handleChange} /> 
 
 					<input type="submit" id="submit" name="Submit"/>
 
