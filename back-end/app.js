@@ -2,23 +2,22 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const fs = require("fs");
-
+const bodyParser = require('body-parser');
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
 require('./auth/auth');
-const routes = require('./routes/routes');
-app.use( bodyParser.urlencoded({ extended : false }) );
 
+const routes = require('./routes/routes');
+const app = express();
+
+app.use( bodyParser.urlencoded({ extended : false }) );
 
 
 const port = process.env.PORT || 4000;
 require('./db.js')
 
-const app = express();
 
 let plans = []
-
-
 
 
 let futureArray = [{
