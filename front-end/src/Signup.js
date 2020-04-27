@@ -31,7 +31,7 @@ function Signup(props) {
       password2: state.password2
     };
 
-	axios({"method":"POST", "url":"http://localhost:4000/submit-signup", "headers":{"content-type": "application/x-www-form-urlencoded"
+	axios({"method":"POST", "url":"http://localhost:4000/signup", "headers":{"content-type": "application/x-www-form-urlencoded"
 		}, data: user}).then(res => {
 	        //console.log(res);
 	        //console.log(res.data);

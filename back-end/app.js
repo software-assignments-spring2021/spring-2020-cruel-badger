@@ -6,13 +6,15 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
 require('./auth/auth');
-
+const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 const secureRoute = require('./routes/secure-routes');
 const app = express();
+const jwt = require('jsonwebtoken');
 
 app.use( bodyParser.urlencoded({ extended : false }) );
 
+const User = mongoose.model("User");
 
 const port = process.env.PORT || 4000;
 require('./db.js')
@@ -516,23 +518,62 @@ app.get('/futureDataTest', (req, res) => {
 });
 
 //GETTING SIGN UP DATA
-app.get('/submit-signup', passport.authenticate('jwt', { session : false }), (req, res) =>{
-	
-  //const username = req.body.username;
-	//console.log(username);
-  console.log("submit-signup");
-  console.log(JSON.parse(Object.keys(req.body)[0]));
 
+
+//4-27 G adding stuff to try auth
+app.post('/signup', function(req, res) {
+  console.log("in sign up");
+  let formData = JSON.parse(Object.keys(req.body)[0]);
+  console.log(formData);
+
+  if (!formData.username || !formData.password) {
+    res.json({success: false, msg: 'Please pass username and password.'});
+  } else {
+    var newUser = new User({
+      username: formData.username,
+      password: formData.password,
+      email: formData.email,
+      tokens: [],
+      plans: []
+    });
+    // save the user
+    newUser.save(function(err) {
+      if (err) {
+        return res.json({success: false, msg: 'Username already exists.'});
+      }
+      res.json({success: true, msg: 'Successful created new user.'});
+    });
+  }
 });
 
-app.get('/submit-login', passport.authenticate('jwt', { session : false }), (req, res) =>{
-	
-  //const username = req.body.username;
-	//console.log(username);
-  console.log("submit-login");
-	console.log(JSON.parse(Object.keys(req.body)[0]));
-	res.redirect("/dashboard");
+app.post('/signin', function(req, res) {
+	console.log("in sign in");
+  let formData = JSON.parse(Object.keys(req.body)[0]);
+  console.log(formData);
+  User.findOne({
+    username: formData.username
+  }, function(err, user) {
+    if (err) throw err;
 
+    if (!user) {
+      res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
+    } else {
+      // check if password matches
+      user.comparePassword(formData.password, function (err, isMatch) {
+        if (isMatch && !err) {
+          // if user is found and password is right create a token
+          var token = jwt.sign(user.toJSON(), "secret", {
+            expiresIn: 604800 // 1 week
+          });
+          // return the information including token as JSON
+           console.log("token is " + token);
+          res.json({success: true, token: 'JWT ' + token, user: user});
+        } else {
+          res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
+        }
+      });
+    }
+  });
 });
 
 // app.listen(4000);

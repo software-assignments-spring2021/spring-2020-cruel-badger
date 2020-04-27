@@ -85,13 +85,22 @@ User.statics.findByCredentials = async (username, password) => {
 
 // Make sure that the user trying to log in has the correct credentials
 User.methods.isValidPassword = async function(password){
- console.log("YOU ARE HERE!!!");
+ console.log("YOU ARE HERE!!! pass match");
   const myUser = this;
   //Hashes the password sent by the user for login and checks if the hashed password stored in the
   //database matches the one sent. Returns true if it does else false.
   const compare = await bcrypt.compare(password, myUser.password);
   return compare;
 }
+
+User.methods.comparePassword = function (passw, cb) {
+    bcrypt.compare(passw, this.password, function (err, isMatch) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, isMatch);
+    });
+};
 
 
 mongoose.model("User", User);
