@@ -519,11 +519,23 @@ app.get('/futureDataTest', (req, res) => {
 });
 
 //GETTING SIGN UP DATA
-app.get('/submit-signup', (req, res) =>{
-	const username = req.body.username;
-	console.log(username);
+app.post('/submit-signup', (req, res) =>{
+	//let username = req.body;
+	console.log("submit-signup");
+	console.log(JSON.parse(Object.keys(req.body)[0]));
 
 });
+
+//GETTING LOGIN DATA
+app.post('/submit-login', (req, res) =>{
+	//let username = req.body;
+	console.log("submit-login");
+	console.log(JSON.parse(Object.keys(req.body)[0]));
+
+	res.redirect("/dashboard");
+
+});
+
 
 // app.listen(4000);
 
