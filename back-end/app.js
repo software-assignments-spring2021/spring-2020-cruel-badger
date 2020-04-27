@@ -5,14 +5,11 @@ const fs = require("fs");
 
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
-const JwtStrategy = passportJWT.Strategy;
-const ExtractJwt = passportJWT.ExtractJwt;
+require('./auth/auth');
+const routes = require('./routes/routes');
+app.use( bodyParser.urlencoded({ extended : false }) );
 
 
-const JWT_params = {
-    //secretOrKey: cfg.jwtSecret,
-    //jwtFromRequest: ExtractJwt.fromAuthHeader()
-};
 
 const port = process.env.PORT || 4000;
 require('./db.js')
@@ -519,11 +516,16 @@ app.get('/futureDataTest', (req, res) => {
 });
 
 //GETTING SIGN UP DATA
-app.get('/submit-signup', (req, res) =>{
+app.get('/submit-signup', passport.authenticate('jwt', { session : false }), (req, res) =>{
 	const username = req.body.username;
 	console.log(username);
 
 });
+
+
+
+
+
 
 // app.listen(4000);
 
