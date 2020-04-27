@@ -1,6 +1,6 @@
 var dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt');
 
 
 
@@ -44,7 +44,7 @@ const Token = new mongoose.Schema({
 
 const User = new mongoose.Schema({
 	username: {type: String, required: true},
-	email: {type: String, required: true},
+	email: {type: String, required: true, unique: true},
 	password: {type: String, required: true},
 	tokens: [Token],
 	plans: [Plan]
@@ -57,7 +57,7 @@ User.pre('save', async function (next) {
         myUser.password = await bcrypt.hash(myUser.password, 8)
     }
     next()
-})
+});
 
 // Use JWT to sign the token, define key in .env file
 User.methods.generateAuthToken = async function() {
@@ -81,6 +81,14 @@ User.statics.findByCredentials = async (username, password) => {
     return myUser
 }
 
+// Make sure that the user trying to log in has the correct credentials
+User.methods.isValidPassword = async function(password){
+  const myUser = this;
+  //Hashes the password sent by the user for login and checks if the hashed password stored in the
+  //database matches the one sent. Returns true if it does else false.
+  const compare = await bcrypt.compare(password, myUser.password);
+  return compare;
+}
 
 
 mongoose.model("User", User);
