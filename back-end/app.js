@@ -5,14 +5,11 @@ const fs = require("fs");
 
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
-const JwtStrategy = passportJWT.Strategy;
-const ExtractJwt = passportJWT.ExtractJwt;
+require('./auth/auth');
+const routes = require('./routes/routes');
+app.use( bodyParser.urlencoded({ extended : false }) );
 
 
-const JWT_params = {
-    //secretOrKey: cfg.jwtSecret,
-    //jwtFromRequest: ExtractJwt.fromAuthHeader()
-};
 
 const port = process.env.PORT || 4000;
 require('./db.js')
@@ -519,23 +516,24 @@ app.get('/futureDataTest', (req, res) => {
 });
 
 //GETTING SIGN UP DATA
-app.post('/submit-signup', (req, res) =>{
-	//let username = req.body;
-	console.log("submit-signup");
+app.get('/submit-signup', passport.authenticate('jwt', { session : false }), (req, res) =>{
+	
+  //const username = req.body.username;
+	//console.log(username);
+  console.log("submit-signup");
 	console.log(JSON.parse(Object.keys(req.body)[0]));
 
 });
 
-//GETTING LOGIN DATA
-app.post('/submit-login', (req, res) =>{
-	//let username = req.body;
-	console.log("submit-login");
+app.get('/submit-login', passport.authenticate('jwt', { session : false }), (req, res) =>{
+	
+  //const username = req.body.username;
+	//console.log(username);
+  console.log("submit-login");
 	console.log(JSON.parse(Object.keys(req.body)[0]));
-
 	res.redirect("/dashboard");
 
 });
-
 
 // app.listen(4000);
 
