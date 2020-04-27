@@ -8,11 +8,12 @@ const JWTstrategy = require('passport-jwt').Strategy;
 
 
 // Handle user registration
-passport.use('signup', new localStrategy({
+passport.use('sign-up', new localStrategy({
   usernameField : 'email',
   passwordField : 'password'
 }, async (email, password, done) => {
     try {
+      console.log("YOU ARE IN THE SIGN-UP!!!");
       //Save the information provided by the user to the the database
       const user = await UserModel.create({ email, password });
       //Send the user information to the next middleware
@@ -23,11 +24,12 @@ passport.use('signup', new localStrategy({
 }));
 
 // Handle user login
-passport.use('login', new localStrategy({
+passport.use('log-in', new localStrategy({
   usernameField : 'email',
   passwordField : 'password'
 }, async (email, password, done) => {
   try {
+    console.log("YOU ARE IN THE LOG-IN!!!");
     //Find the user associated with the email provided by the user
     const user = await UserModel.findOne({ email });
     if( !user ){
@@ -55,6 +57,7 @@ passport.use(new JWTstrategy({
   jwtFromRequest : ExtractJWT.fromUrlQueryParameter('secret_token')
 }, async (token, done) => {
   try {
+    console.log("TRYING TO VERIFY TOKEN!!!");
     //Pass the user details to the next middleware
     return done(null, token.user);
   } catch (error) {

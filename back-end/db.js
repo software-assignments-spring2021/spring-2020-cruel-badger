@@ -61,6 +61,7 @@ User.pre('save', async function (next) {
 
 // Use JWT to sign the token, define key in .env file
 User.methods.generateAuthToken = async function() {
+	console.log("YOU ARE HERE!!!");
     const myUser = this
     const token = jwt.sign({_id: myUser._id}, process.env.JWT_KEY)
     myUser.tokens = myUser.tokens.concat({token})
@@ -70,6 +71,7 @@ User.methods.generateAuthToken = async function() {
 
 // Search for a user with the username provided, return an err if credentials are invalid
 User.statics.findByCredentials = async (username, password) => {
+	console.log("YOU ARE HERE!!!");
     const myUser = await User.findOne({ username } )
     if (!myUser) {
         throw new Error({ error: 'Invalid login credentials' })
@@ -83,6 +85,7 @@ User.statics.findByCredentials = async (username, password) => {
 
 // Make sure that the user trying to log in has the correct credentials
 User.methods.isValidPassword = async function(password){
+ console.log("YOU ARE HERE!!!");
   const myUser = this;
   //Hashes the password sent by the user for login and checks if the hashed password stored in the
   //database matches the one sent. Returns true if it does else false.
@@ -94,6 +97,9 @@ User.methods.isValidPassword = async function(password){
 mongoose.model("User", User);
 
 
-mongoose.connect(process.env.MONGOATLAS_URI);
+//mongoose.connect(process.env.MONGOATLAS_URI);
+mongoose.set('useCreateIndex', true);
+mongoose.connect(process.env.MONGOATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://127.0.0.1:27017/passport-jwt');
 
 

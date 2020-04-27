@@ -8,6 +8,7 @@ const passportJWT = require('passport-jwt');
 require('./auth/auth');
 
 const routes = require('./routes/routes');
+const secureRoute = require('./routes/secure-routes');
 const app = express();
 
 app.use( bodyParser.urlencoded({ extended : false }) );
@@ -520,7 +521,7 @@ app.get('/submit-signup', passport.authenticate('jwt', { session : false }), (re
   //const username = req.body.username;
 	//console.log(username);
   console.log("submit-signup");
-	console.log(JSON.parse(Object.keys(req.body)[0]));
+  console.log(JSON.parse(Object.keys(req.body)[0]));
 
 });
 
@@ -539,10 +540,6 @@ app.get('/submit-login', passport.authenticate('jwt', { session : false }), (req
 module.exports = app.listen(4000);
 
 
-// uncomment when ready for testing
-// app.listen(port, () => {
-//     console.log(`Server running on port ${port}`)
-// })
 
 
 
