@@ -19,16 +19,21 @@ function Login(props) {
 
   const handleSubmit = event => {
     // event.preventDefault();
-
+    event.preventDefault();
     const user = {
       username: state.username,
       password: state.password,
     };
 
-	axios({"method":"POST", "url":"http://localhost:4000/submit-login", "headers":{"content-type": "application/x-www-form-urlencoded"
+	axios({"method":"POST", "url":"http://localhost:4000/signin", "headers":{"content-type": "application/x-www-form-urlencoded"
 		}, data: user}).then(res => {
+			let token = res.data.token.split(" ")[1];
+			console.log(token);
+			localStorage.setItem("token", token);
 	        //console.log(res);
-	        //console.log(res.data);
+	        
+	        localStorage.setItem("username", res.data.user.username);
+	        localStorage.setItem("email", res.data.user.email);
 	})
   }
 	return(
@@ -38,7 +43,7 @@ function Login(props) {
 				<h1 id="loginh1">Login</h1>
 				<p id="loginaccess"> This will allow you to access your dashboard containing your saved future paths </p>
 				<div id="loginform">
-					<form onSubmit={handleSubmit} action="/dashboard">
+					<form onSubmit={handleSubmit} >
 
 					<p className="formstuff">Username:</p>
 					<input type="text" name="username" defaultValue="" onChange={handleChange}/> 
