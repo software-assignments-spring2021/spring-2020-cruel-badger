@@ -103,7 +103,7 @@ User.methods.comparePassword = function (passw, cb) {
 };
 
 
-mongoose.model("User", User);
+let UserModel = mongoose.model("User", User);
 
 mongoose.model("Plan", Plan);
 
@@ -113,4 +113,4 @@ mongoose.set('useCreateIndex', true);
 mongoose.connect(process.env.MONGOATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect('mongodb://127.0.0.1:27017/passport-jwt');
 
-
+module.exports = UserModel;

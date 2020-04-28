@@ -90,8 +90,8 @@ function Dashboard(props) {
       params: { 
         username: localStorage.getItem("username"), 
         email: localStorage.getItem("email")
-      }
-    }).then(function(response) {
+      },
+  {headers: {Authorization: 'Bearer ' + localStorage.token}}).then(function(response) {
       setFormObjects(response.data);
     });
   }, []);

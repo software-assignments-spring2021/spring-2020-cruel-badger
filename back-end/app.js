@@ -445,18 +445,16 @@ app.post("/processFormData", (req, res) => {
 })
 
 //get function to get array of futures
-app.get('/futures-array', (req, res) => {
-	console.log("futures-array");
-	console.log(req.query);
-	// User.find({ username: req.query.username, email: req.query.email }, function (err, user) {
-	// 	if (err) return handleError(err);
-	// 	//console.log(user.plans);
-	// 	//futureArray = user.plans;
-	// });
-	// User.findOne({ username: req.query.username, email: req.query.email }, "plans").populate("plans", function (err, user) {
-	// 	if (err) return handleError(err);
-	// 	console.log(user);
-	// });
+app.get('/futures-array', passport.authenticate('jwt', {
+  session: false
+}), (req, res) => {
+	console.log("in futures array")
+	console.log(req.user)
+	console.log(req.headers.authorization.split(" ")[1]);
+	let token = req.headers.authorization.split(" ")[1];
+	User.findOne({email:req.user.email}, (err, results) => {
+		console.log(results);
+	})
     res.send(futureArray);
 });
 
@@ -569,8 +567,11 @@ app.post('/signup', function(req, res) {
     // save the user
     newUser.save(function(err) {
       if (err) {
+      	console.log("error");
+      	console.log(err);
         return res.json({success: false, msg: 'Username already exists.'});
       }
+      console.log("Should be no error");
       res.json({success: true, msg: 'Successful created new user.'});
     });
   }
