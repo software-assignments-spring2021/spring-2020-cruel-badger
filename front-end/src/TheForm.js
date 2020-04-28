@@ -25,6 +25,8 @@ const TheForm = (props) => {
 	const handleSubmit = (event) => {
 		console.log("Handling Submit")
 		console.log("Results are");
+		results["username"] = localStorage.username;
+		results["email"] = localStorage.email;
 		console.log(results);
 		//callAPI();
 		//axios.post("http://localhost:4000/processFormData", {data:"hello"});
