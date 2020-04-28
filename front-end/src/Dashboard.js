@@ -86,12 +86,7 @@ function renderCard(name, state, index) {
 function Dashboard(props) {
   let [formObjects, setFormObjects] = useState([]); 
   useEffect(() => {
-    axios.get("http://localhost:4000/futures-array", { 
-      params: { 
-        username: localStorage.getItem("username"), 
-        email: localStorage.getItem("email")
-      },
-  {headers: {Authorization: 'Bearer ' + localStorage.token}}).then(function(response) {
+   axios.get("http://localhost:4000/futures-array", {headers: {Authorization: 'Bearer ' + localStorage.token}}, {params: {username: localStorage.getItem("username"), email: localStorage.getItem("email")}}).then(function(response) {
       setFormObjects(response.data);
     });
   }, []);
