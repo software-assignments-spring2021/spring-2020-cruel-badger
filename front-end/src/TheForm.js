@@ -38,7 +38,11 @@ const TheForm = (props) => {
 	    "headers":{
 	    "content-type": "application/x-www-form-urlencoded"
 		},	
-	    data: results
+	    data: {
+	    	results: results,
+	    	username: localStorage.getItem("username"),
+	    	email: localStorage.getItem("email")
+	    }
     	}).then(response => {
     		console.log(response);
 

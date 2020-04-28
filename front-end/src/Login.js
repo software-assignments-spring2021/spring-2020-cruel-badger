@@ -43,7 +43,7 @@ function Login(props) {
 				<h1 id="loginh1">Login</h1>
 				<p id="loginaccess"> This will allow you to access your dashboard containing your saved future paths </p>
 				<div id="loginform">
-					<form onSubmit={handleSubmit} >
+					<form onSubmit={handleSubmit} action="/dashboard">
 
 					<p className="formstuff">Username:</p>
 					<input type="text" name="username" defaultValue="" onChange={handleChange}/> 
