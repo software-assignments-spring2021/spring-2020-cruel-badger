@@ -17,7 +17,9 @@ app.use( bodyParser.urlencoded({ extended : false }) );
 const User = mongoose.model("User");
 
 const port = process.env.PORT || 4000;
-require('./db.js')
+require('./db.js');
+
+const PlanModel = mongoose.model("Plan");
 
 
 let plans = []
@@ -205,13 +207,20 @@ let abbrToState = (abbr) => {
 //route to recieve and process front end results
 app.post("/processFormData", (req, res) => {
 	console.log("In the backend");
-	console.log(req.body);
+	//console.log(req.body);
 
-	console.log(Object.keys(req.body));
-	console.log(JSON.parse(Object.keys(req.body)[0]))
+	//console.log(Object.keys(req.body));
+	//console.log(JSON.parse(Object.keys(req.body)[0]));
 
 	//let formData = req.body.data
-	let formData = JSON.parse(Object.keys(req.body)[0]);
+	let receivedData = JSON.parse(Object.keys(req.body)[0]);
+	//console.log(testdata); 
+	// console.log(receivedData.results);
+	// console.log(receivedData.username);
+	// console.log(receivedData.email);
+	//console.log(JSON.parse(Object.keys(req.body)[0].username));
+	//console.log(JSON.parse(Object.keys(req.body)[0].email));
+	let formData = receivedData.results;
 	console.log("form data is");
 	console.log(formData)
 
@@ -390,7 +399,6 @@ app.post("/processFormData", (req, res) => {
       	let adjustedMoneyOut = adjustedHousing + adjustedFood + adjustedTransport + yearlySavings + adjustedLeisure + adjustedOther + totalTax + yearlyDebt;
 
       	let obj = {
-
       		name: formData.name,
       		currentStateAbbr: formData.currentState,
       		futureStateAbbr: formData.futureState,
@@ -418,6 +426,13 @@ app.post("/processFormData", (req, res) => {
       		adjustedMoneyOut: adjustedMoneyOut,
       		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax
       	}
+      	let newPlan = new PlanModel(obj);
+      	newPlan.save(function (err) {
+      		if (err) return handleError(err);
+      	});
+      	//push to atlas
+      	let query = { username: receivedData.username, email: receivedData.email };
+      	User.findOneAndUpdate(query, {$push: {plans: newPlan}}, {new: true, upsert: true}, function (err) {});
 
       	futureArray.push(obj);
       	let id = futureArray.length-1;
@@ -443,9 +458,13 @@ app.get('/futures-array', passport.authenticate('jwt', {
     res.send(futureArray);
 });
 
-app.get('/futureArrayTest', (req, res) => {
+app.get('/future', (req, res) => {
 	let index = JSON.parse(req.query.id);
 	console.log(index.id);
+
+	// let future = PlanModel.findById(index.id);
+	// console.log(future);
+
 	let future = futureArray[index.id];
 	//console.log(((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100).toFixed(2));
 
@@ -568,6 +587,7 @@ app.post('/signin', function(req, res) {
     if (err) throw err;
 
     if (!user) {
+    	console.log("user not found");
       res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
     } else {
       // check if password matches
@@ -581,6 +601,7 @@ app.post('/signin', function(req, res) {
            console.log("token is " + token);
           res.json({success: true, token: 'JWT ' + token, user: user});
         } else {
+        	console.log("wrong password");
           res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
         }
       });

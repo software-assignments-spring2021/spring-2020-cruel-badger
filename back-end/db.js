@@ -105,6 +105,8 @@ User.methods.comparePassword = function (passw, cb) {
 
 let UserModel = mongoose.model("User", User);
 
+mongoose.model("Plan", Plan);
+
 
 //mongoose.connect(process.env.MONGOATLAS_URI);
 mongoose.set('useCreateIndex', true);
