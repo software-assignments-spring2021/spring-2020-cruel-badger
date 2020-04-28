@@ -19,7 +19,7 @@ function Login(props) {
 
   const handleSubmit = event => {
     // event.preventDefault();
-    event.preventDefault();
+    //event.preventDefault();
     const user = {
       username: state.username,
       password: state.password,
