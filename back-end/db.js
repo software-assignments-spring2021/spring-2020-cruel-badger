@@ -31,6 +31,8 @@ const Plan = new mongoose.Schema({
 	adjustedOther: {type: Number, required: true},
 	adjustedMoneyOut: {type: Number, required: true},
 	adjustedMoneyOut_tax: {type: Number, required: true},
+	email: {type: String, required: true},
+	username: {type: String, required: true},
 }, {
 	_id: true
 });
@@ -47,7 +49,7 @@ const User = new mongoose.Schema({
 	email: {type: String, required: true, unique: true},
 	password: {type: String, required: true},
 	tokens: [Token],
-	plans: [Plan]
+	plans: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Plan' }]
 })
 
 // Hash the password before you save the object
@@ -104,6 +106,8 @@ User.methods.comparePassword = function (passw, cb) {
 
 
 let UserModel = mongoose.model("User", User);
+
+let PlanModel = mongoose.model("Plan", Plan);
 
 
 //mongoose.connect(process.env.MONGOATLAS_URI);

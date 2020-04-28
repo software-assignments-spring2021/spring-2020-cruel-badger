@@ -15,6 +15,7 @@ const jwt = require('jsonwebtoken');
 app.use( bodyParser.urlencoded({ extended : false }) );
 
 const User = mongoose.model("User");
+const Plan = mongoose.model("Plan");
 
 const port = process.env.PORT || 4000;
 require('./db.js')
@@ -416,12 +417,58 @@ app.post("/processFormData", (req, res) => {
       		adjustedLeisure: adjustedLeisure,
       		adjustedOther: adjustedOther,
       		adjustedMoneyOut: adjustedMoneyOut,
-      		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax
+      		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax,
+
+
       	}
 
-      	futureArray.push(obj);
-      	let id = futureArray.length-1;
-      	res.json({future: obj, futureID: id});
+      	let newPlan = new Plan({
+      		name: formData.name,
+      		currentStateAbbr: formData.currentState,
+      		futureStateAbbr: formData.futureState,
+      		currentStateLong: currentState,
+      		futureStateLong: futureState,
+      		currentStateData: currentCostData,
+      		futureStateData: futureCostData,
+      		yearlyIncome: yearlyIncome,
+      		yearlyOtherIncome: yearlyOtherIncome,
+      		moneyIn: moneyIn,
+      		moneyIn_tax: moneyIn - totalTax,
+      		yearlyHousing: yearlyHousing,
+      		yearlyFood: yearlyFood,
+      		yearlyTransport: yearlyTransport,
+      		yearlySavings: yearlySavings,
+      		yearlyLeisure: yearlyLeisure,
+      		yearlyOther: yearlyOther,
+      		moneyOut: moneyOut,
+      		moneyOut_tax: moneyOut - totalTax,
+      		adjustedFood: adjustedFood,
+      		adjustedHousing: adjustedHousing,
+      		adjustedTransport: adjustedTransport,
+      		adjustedLeisure: adjustedLeisure,
+      		adjustedOther: adjustedOther,
+      		adjustedMoneyOut: adjustedMoneyOut,
+      		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax,
+      		email: formData.email,
+      		username: formData.username
+      	})
+
+      	newPlan.save((err) => {
+      		if (err) throw err;
+      		console.log("future saved");
+      	})
+
+      	Plan.find({email: formData.email}, (err, results) => {
+      		if (err) console.log(err);
+      		// let id = results.length-1;
+      		// console.log(id);
+      		res.json({future: obj, futureID: results.length});
+
+      	})
+
+      	// futureArray.push(obj);
+      	// let id = futureArray.length-1;
+      	// res.json({future: obj, futureID: id});
 
     })
     .catch((error)=>{
@@ -430,70 +477,87 @@ app.post("/processFormData", (req, res) => {
 })
 
 //get function to get array of futures
-app.get('/futures-array', passport.authenticate('jwt', {
+//the call the dashboard makes
+app.get('/dashboard', passport.authenticate('jwt', {
   session: false
 }), (req, res) => {
 	console.log("in futures array")
 	console.log(req.user)
 	console.log(req.headers.authorization.split(" ")[1]);
 	let token = req.headers.authorization.split(" ")[1];
-	User.findOne({email:req.user.email}, (err, results) => {
+	Plan.find({email:req.user.email}, (err, results) => {
 		console.log(results);
+		res.send(results);
 	})
-    res.send(futureArray);
+    //res.send(futureArray);
 });
 
-app.get('/futureArrayTest', (req, res) => {
+
+// this is the route the future page recieves from
+app.get('/futureArrayTest', passport.authenticate('jwt', {
+  session: false
+}), (req, res) => {
+	console.log(req.headers.authorization);
+	console.log(req.query);
 	let index = JSON.parse(req.query.id);
+	console.log("index id")
 	console.log(index.id);
-	let future = futureArray[index.id];
+	//let future = futureArray[index.id];
+	console.log(req.user);
+	Plan.find({email:req.user.email}, (err, results) => {
+		if (err) throw err;
+		console.log(results);
+		let future = results[index.id];
+
+		//get money in vs money out flow
+		let moneyFlow = future.moneyIn_tax - future.adjustedMoneyOut_tax;
+
+		//financial status determines between -1, 0, 1 how well the plan will do
+		let financialStatus = 0;
+		if (moneyFlow > -500 && moneyFlow < 500) {
+			financialStatus = 0;
+		} else if (moneyFlow <= -500) {
+			financialStatus = -1;
+		}
+		else {
+			financialStatus = 1;
+		}
+
+		//get the difference of the cost index between states
+		let costDiff = ((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100.000).toFixed(2);
+		//console.log(costDiff);
+		//get max expense
+		// let expenses = [['Food', future.adjustedFood],
+		// 				['Rent', future.adjustedHousing],
+		// 				['Commute', future.adjustedTransport], 
+		// 				['Leisure', future.adjustedLeisure], 
+		// 				['Misc.', future.adjustedOther]];
+		// come back to this later
+		// let maxExpense = expenses.map(function() { return o.y; })
+
+		const body = {
+			cashFlow: moneyFlow,
+			financialIndicator: financialStatus,
+			stateCost: costDiff,
+			currState: future.currentStateAbbr,
+			futureState: future.futureStateAbbr, 
+			pieChart: [
+				['Expense', 'Dollars'],
+		        ['Food', future.adjustedFood], 
+		        ['Rent', future.adjustedHousing],
+		        ['Commute', future.adjustedTransport],
+		        ['Leisure', future.adjustedLeisure],
+		        ['Misc.', future.adjustedOther],
+			],
+			barChart: [['', 'In', 'Out'],
+	                  ['Cash Flow', future.moneyIn_tax, future.adjustedMoneyOut_tax],
+	        ],
+		}
+		console.log(body);
+	    res.send(body);
+	})
 	//console.log(((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100).toFixed(2));
 
-	//get money in vs money out flow
-	let moneyFlow = future.moneyIn_tax - future.adjustedMoneyOut_tax;
-
-	//financial status determines between -1, 0, 1 how well the plan will do
-	let financialStatus = 0;
-	if (moneyFlow > -500 && moneyFlow < 500) {
-		financialStatus = 0;
-	} else if (moneyFlow <= -500) {
-		financialStatus = -1;
-	}
-	else {
-		financialStatus = 1;
-	}
-
-	//get the difference of the cost index between states
-	let costDiff = ((future.futureStateData.costIndex - future.currentStateData.costIndex) / future.currentStateData.costIndex * 100.000).toFixed(2);
-	//console.log(costDiff);
-	//get max expense
-	// let expenses = [['Food', future.adjustedFood],
-	// 				['Rent', future.adjustedHousing],
-	// 				['Commute', future.adjustedTransport], 
-	// 				['Leisure', future.adjustedLeisure], 
-	// 				['Misc.', future.adjustedOther]];
-	// come back to this later
-	// let maxExpense = expenses.map(function() { return o.y; })
-
-	const body = {
-		cashFlow: moneyFlow,
-		financialIndicator: financialStatus,
-		stateCost: costDiff,
-		currState: future.currentStateAbbr,
-		futureState: future.futureStateAbbr, 
-		pieChart: [
-			['Expense', 'Dollars'],
-	        ['Food', future.adjustedFood], 
-	        ['Rent', future.adjustedHousing],
-	        ['Commute', future.adjustedTransport],
-	        ['Leisure', future.adjustedLeisure],
-	        ['Misc.', future.adjustedOther],
-		],
-		barChart: [['', 'In', 'Out'],
-                  ['Cash Flow', future.moneyIn_tax, future.adjustedMoneyOut_tax],
-        ],
-	}
-    res.send(body);
 });
 
 //testing future results
