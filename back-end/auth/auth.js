@@ -49,12 +49,32 @@ passport.use('log-in', new localStrategy({
   }
 }));
 
-
+var opts = {}
+opts.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = 'secret';
 // Verify token sent by user is valid
+passport.use(new JWTstrategy(opts, function(jwt_payload, done) {
+  console.log("passport use");
+  console.log(jwt_payload);
+    UserModel.findOne({email: jwt_payload.email}, function(err, user) {
+      console.log(user);
+        if (err) {
+            return done(err, false);
+        }
+        if (user) {
+            return done(null, user);
+        } else {
+            return done(null, false);
+            // or you could create a new account
+        }
+    });
+}));
+
+/*
 passport.use(new JWTstrategy({
 
   secretOrKey : 'top_secret',
-  jwtFromRequest : ExtractJWT.fromUrlQueryParameter('secret_token')
+  jwtFromRequest : ExtractJWT.fromAuthHeaderAsBearerToken();
 }, async (token, done) => {
   try {
     console.log("TRYING TO VERIFY TOKEN!!!");
@@ -64,6 +84,7 @@ passport.use(new JWTstrategy({
     done(error);
   }
 }));
+*/
 
 
 
