@@ -163,7 +163,7 @@ const Future = (props) => {
   let [futureState, setFutureState] = useState();
   useEffect(() => {
     console.log("in use effect in future page");
-    axios.get("/futureArrayTest", {params: {id: futureID}, headers: {Authorization: 'Bearer ' + localStorage.token}}).then(function(response) {
+    axios.get("/future", {params: {id: futureID}, headers: {Authorization: 'Bearer ' + localStorage.token}}).then(function(response) {
 
       //console.log(response.data);
       setPieData(response.data.pieChart);

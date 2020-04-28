@@ -20,7 +20,7 @@ const Plan = mongoose.model("Plan");
 const port = process.env.PORT || 4000;
 require('./db.js');
 
-const PlanModel = mongoose.model("Plan");
+//const PlanModel = mongoose.model("Plan");
 
 
 let plans = []
@@ -426,47 +426,49 @@ app.post("/processFormData", (req, res) => {
       		adjustedOther: adjustedOther,
       		adjustedMoneyOut: adjustedMoneyOut,
       		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax,
-
-
-      	}
-      	let newPlan = new PlanModel(obj);
-      	newPlan.save(function (err) {
-      		if (err) return handleError(err);
-      	});
-      	//push to atlas
-      	let query = { username: receivedData.username, email: receivedData.email };
-      	User.findOneAndUpdate(query, {$push: {plans: newPlan}}, {new: true, upsert: true}, function (err) {});
-
-      	let newPlan = new Plan({
-      		name: formData.name,
-      		currentStateAbbr: formData.currentState,
-      		futureStateAbbr: formData.futureState,
-      		currentStateLong: currentState,
-      		futureStateLong: futureState,
-      		currentStateData: currentCostData,
-      		futureStateData: futureCostData,
-      		yearlyIncome: yearlyIncome,
-      		yearlyOtherIncome: yearlyOtherIncome,
-      		moneyIn: moneyIn,
-      		moneyIn_tax: moneyIn - totalTax,
-      		yearlyHousing: yearlyHousing,
-      		yearlyFood: yearlyFood,
-      		yearlyTransport: yearlyTransport,
-      		yearlySavings: yearlySavings,
-      		yearlyLeisure: yearlyLeisure,
-      		yearlyOther: yearlyOther,
-      		moneyOut: moneyOut,
-      		moneyOut_tax: moneyOut - totalTax,
-      		adjustedFood: adjustedFood,
-      		adjustedHousing: adjustedHousing,
-      		adjustedTransport: adjustedTransport,
-      		adjustedLeisure: adjustedLeisure,
-      		adjustedOther: adjustedOther,
-      		adjustedMoneyOut: adjustedMoneyOut,
-      		adjustedMoneyOut_tax: adjustedMoneyOut - totalTax,
       		email: formData.email,
       		username: formData.username
-      	})
+      	}
+      	// let newPlan = new PlanModel(obj);
+      	// newPlan.save(function (err) {
+      	// 	if (err) return handleError(err);
+      	// });
+      	// //push to atlas
+      	// let query = { username: receivedData.username, email: receivedData.email };
+      	// User.findOneAndUpdate(query, {$push: {plans: newPlan}}, {new: true, upsert: true}, function (err) {});
+
+      	// let newPlan = new Plan({
+      	// 	name: formData.name,
+      	// 	currentStateAbbr: formData.currentState,
+      	// 	futureStateAbbr: formData.futureState,
+      	// 	currentStateLong: currentState,
+      	// 	futureStateLong: futureState,
+      	// 	currentStateData: currentCostData,
+      	// 	futureStateData: futureCostData,
+      	// 	yearlyIncome: yearlyIncome,
+      	// 	yearlyOtherIncome: yearlyOtherIncome,
+      	// 	moneyIn: moneyIn,
+      	// 	moneyIn_tax: moneyIn - totalTax,
+      	// 	yearlyHousing: yearlyHousing,
+      	// 	yearlyFood: yearlyFood,
+      	// 	yearlyTransport: yearlyTransport,
+      	// 	yearlySavings: yearlySavings,
+      	// 	yearlyLeisure: yearlyLeisure,
+      	// 	yearlyOther: yearlyOther,
+      	// 	moneyOut: moneyOut,
+      	// 	moneyOut_tax: moneyOut - totalTax,
+      	// 	adjustedFood: adjustedFood,
+      	// 	adjustedHousing: adjustedHousing,
+      	// 	adjustedTransport: adjustedTransport,
+      	// 	adjustedLeisure: adjustedLeisure,
+      	// 	adjustedOther: adjustedOther,
+      	// 	adjustedMoneyOut: adjustedMoneyOut,
+      	// 	adjustedMoneyOut_tax: adjustedMoneyOut - totalTax,
+      	// 	email: formData.email,
+      	// 	username: formData.username
+      	// })
+
+      	let newPlan = new Plan(obj);
 
       	newPlan.save((err) => {
       		if (err) throw err;
@@ -509,7 +511,7 @@ app.get('/dashboard', passport.authenticate('jwt', {
 
 
 // this is the route the future page recieves from
-app.get('/futureArrayTest', passport.authenticate('jwt', {
+app.get('/future', passport.authenticate('jwt', {
   session: false
 }), (req, res) => {
 	console.log(req.headers.authorization);
