@@ -675,7 +675,7 @@ app.post('/signin', function(req, res) {
 
 app.post('/delete', function(req, res){
 	let receivedData = JSON.parse(Object.keys(req.body)[0]);
-	Plan.deleteOne({name: recieveData.name, futureStateAbbr: recieveData.futureState}, (err, results) => {
+	Plan.deleteOne({name: receivedData.name, futureStateAbbr: receivedData.futureState}, (err, results) => {
 		if (err) {
 			res.send(err);
 		}
