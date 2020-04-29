@@ -673,6 +673,15 @@ app.post('/signin', function(req, res) {
 
 // app.listen(4000);
 
+app.post('/delete', function(req, res){
+	let receivedData = JSON.parse(Object.keys(req.body)[0]);
+	Plan.deleteOne({name: recieveData.name, futureStateAbbr: recieveData.futureState}, (err, results) => {
+		if (err) {
+			res.send(err);
+		}
+	})
+})
+
 module.exports = app.listen(4000);
 
 

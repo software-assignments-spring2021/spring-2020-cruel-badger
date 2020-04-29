@@ -43,9 +43,20 @@ function renderCard(name, state, index) {
 // function renderCard(name, state) {
 
   function handleClick(e) {
-    e.preventDefault();
+    //e.preventDefault();
     console.log('deleted');
-    alert("Future has been deleted");
+    //alert("Future has been deleted");
+    axios({
+      "method":"POST",
+      "url":"http://localhost:4000/delete",
+      "headers":{
+      "content-type": "application/x-www-form-urlencoded"
+    },  
+      data: {
+        name: name,
+        futureState: state
+      }
+      })
 
   }
 
@@ -54,7 +65,7 @@ function renderCard(name, state, index) {
   return (
      <div className="card">
           <h3 className="title">{name}</h3>
-          <button onClick={handleClick} className="btn" ><i className="fa fa-trash"></i></button>
+          <a href="/dashboard" onClick={handleClick} className="btn" ><i className="fa fa-trash"></i></a>
           <div className="bar">
           <div className="emptybar"></div>
 
