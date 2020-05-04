@@ -110,9 +110,10 @@ let UserModel = mongoose.model("User", User);
 let PlanModel = mongoose.model("Plan", Plan);
 
 
-//mongoose.connect(process.env.MONGOATLAS_URI);
+
 mongoose.set('useCreateIndex', true);
-mongoose.connect("mongodb+srv://admin:cruelbadger2020@broke-millennial-vnlui.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
-//mongoose.connect('mongodb://127.0.0.1:27017/passport-jwt');
+mongoose.connect(process.env.MONGOATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect("mongodb+srv://admin:cruelbadger2020@broke-millennial-vnlui.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 module.exports = UserModel;
