@@ -2,10 +2,16 @@
 FROM node:current
 
 # Set the working directory.
-WORKDIR ~/spring-2020-cruel-badger/front-end
+WORKDIR usr/src/app/
 
 # Copy the file from your host to your current location.
-COPY package.json .
+COPY /front-end/package.json ./front-end
+
+#Copy the rest of our app's files into the current directory
+COPY . .
+
+#change working directory to front-end because that is what we are running
+WORKDIR ./front-end
 
 # Run the command inside your image filesystem.
 RUN npm install
@@ -16,5 +22,8 @@ EXPOSE 8080
 # Run the specified command within the container.
 CMD [ "npm", "start" ]
 
-# Copy the rest of your app's source code from your host to your image filesystem.
-COPY . .
+
+
+
+#I built this out to listen on ports 8080 and then send to port 3000
+#docker run --publish 3000:8080 bm-app:1.0
