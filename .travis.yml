@@ -3,5 +3,7 @@ node_js:
 - "node"
 install:
 - npm install
+before_script:
+- cd back-end
 script:
 - npm test
