@@ -279,27 +279,6 @@ let abbrToState = (abbr) => {
 
 
 
-
-
-// describe("Form processing", () => {
-
-// 	it("Should return an error from axios", (done) => {
-// 		chai.request(app).post("/processFormData")
-// 		.send({"{}": ""}).end((err, res) => {
-// 			expect(res).to.have.status(400);
-// 			done()
-// 		})
-// 	})
-
-// 	it("Should return a proper object", (done) => {
-// 		chai.request(app).post("/processFormData")
-// 		.send({"{futureState: 'NY', salary: 100000}": ""}).end((err, res) => {
-// 			expect(res).to.be.json;
-// 			done()
-// 		})
-// 	})
-// })
-
 // describe("Form results", () => {
 // 	it("Should return a form object with text field properties", done => {
 // 		chai
@@ -328,31 +307,7 @@ let abbrToState = (abbr) => {
 //         });
 // 	});
 
-//     it("Should send a Status Code 400 for required input missing", done => {
-//     	chai
-//     		.request(app)
-//             .post('/processFormData')
-//             .send({
-// 		      		name: null,
-// 		      		currentStateAbbr: null,
-// 		      		futureStateAbbr: null,
-// 		      		currentStateLong: null,
-// 		      		futureStateLong: null,
-// 		      		currentStateData: {
-// 		            "State": null,
-// 		            "costIndex": null,
-// 		            "costRank": null,
-// 		            "groceryCost": null,
-// 		            "housingCost": null,
-// 		            "utilitiesCost": null,
-// 		            "transportationCost": null,
-// 		            "miscCost": null
-// 		        }})
-//             .end((err, res) =>{
-//     			expect(res).to.have.status(400);
-//                 done();
-//         });
-//     });
+
 
 //     it("Should send a Status Code 200 for complete form", done => {
 //     	chai
