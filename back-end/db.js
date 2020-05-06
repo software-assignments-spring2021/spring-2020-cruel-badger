@@ -115,8 +115,9 @@ mongoose.set('useCreateIndex', true);
 console.log(process.env);
 console.log(process.env.MONGOATLAS_URI);
 console.log(process.env.MONGOATLAS_URI);
-mongoose.connect(process.env.MONGOATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-//mongoose.connect("mongodb+srv://admin:cruelbadger2020@broke-millennial-vnlui.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+//console.log(MONGOATLAS_URI);
+//mongoose.connect(process.env.MONGOATLAS_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://admin:cruelbadger2020@broke-millennial-vnlui.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 module.exports = UserModel;
