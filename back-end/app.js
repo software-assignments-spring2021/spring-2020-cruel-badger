@@ -22,6 +22,87 @@ require('./db.js');
 
 //const PlanModel = mongoose.model("Plan");
 
+const Validator = require('validatorjs');
+const validator = (body, rules, messages, cb) => {
+	console.log("in validator");
+
+    const validation = new Validator(body, rules, messages);
+    //console.log(validation.passes());
+    validation.passes(() => cb(null, true));
+    validation.fails(() => cb(validation.errors, false));
+};
+
+
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]/;
+
+Validator.register('strict', value => passwordRegex.test(value),
+    'password must contain at least one uppercase letter, one lowercase letter and one number');
+
+const signupValidator = (req, res, next) => {
+	let checkData = JSON.parse(Object.keys(req.body)[0]);
+	const validRules = {
+	  	"username": "required|string",
+	  	"password": "required|string|min:6|confirmed|strict",
+	  	"email": "required|email"
+	}
+
+	validator(checkData, validRules, {}, (err, status) => {
+		if (!status) {
+			console.log(status);
+			console.log(err);
+
+			res.json({success: false, message: "Validation failed", data: err});
+		}
+		else {
+			next();
+		}
+	});
+}
+
+const createValidator = (req, res, next) => {
+	//console.log(JSON.parse(Object.keys(req.body)[0]))
+	let checkData = JSON.parse(Object.keys(req.body)[0]).results;
+	const validRules = {
+		"name": "required|string",
+		"currentState": "required|string",
+		"futureState": "required|string",
+		"salary": "required|numeric",
+		"salaryType": "required|string",
+		"otherIncome": "required|numeric",
+	    "otherIncomeType": 'required|string',
+	    "housingLow": 'required|numeric',
+	    "housingHigh": `required|numeric|min:${checkData.housingLow}`,
+	    "foodLow": 'required|numeric',
+	    "foodHigh": `required|numeric|min:${checkData.foodLow}`,
+	    "foodType": 'required|string',
+	    "transportLow": 'required|numeric',
+	    "transportHigh": `required|numeric|min:${checkData.transportLow}`,
+	    "transportType": 'required|string',
+	    "savingsLow": 'required|numeric',
+	    "savingsHigh": `required|numeric|min:${checkData.savingsLow}`,
+ 	    "savingsType": 'required|string',
+	    "leisureLow": 'required|numeric',
+	    "leisureHigh": `required|numeric|min:${checkData.leisureLow}`,
+	    "leisureType": 'required|string',
+	    "otherLow": 'required|numeric',
+	    "otherHigh": `required|numeric|min:${checkData.otherLow}`,
+	    "otherType": 'required|string',
+	    "debt": 'required|numeric'
+
+	}
+	validator(checkData, validRules, {}, (err, status) => {
+		if (!status) {
+			console.log(status);
+			console.log(err);
+
+			res.json({success: false, message: "Validation failed", data: err});
+		}
+		else {
+			next();
+		}
+	});
+}
+
 
 let plans = []
 
@@ -206,7 +287,7 @@ let abbrToState = (abbr) => {
 
 
 //route to recieve and process front end results
-app.post("/processFormData", (req, res) => {
+app.post("/processFormData", createValidator, (req, res) => {
 	console.log("In the backend");
 	//console.log(req.body);
 
@@ -611,10 +692,12 @@ app.get('/futureDataTest', (req, res) => {
 
 
 //4-27 G adding stuff to try auth
-app.post('/signup', function(req, res) {
+app.post('/signup', signupValidator, function(req, res) {
   console.log("in sign up");
   let formData = JSON.parse(Object.keys(req.body)[0]);
   console.log(formData);
+
+  
 
   if (!formData.username || !formData.password) {
     res.json({success: false, msg: 'Please pass username and password.'});
