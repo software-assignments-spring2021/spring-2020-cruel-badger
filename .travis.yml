@@ -7,4 +7,7 @@ script:
 - npm install
 - npm install mocha chai --save-dev
 - npm test
+env:
+   global:
+         secure: "ko//03Db1uOyfTF1oqF+V1c4Ne/dp/omBcPX7oiFfVwZweBJhNffVgHSkUWicNIIDaUL4Gfnj0Y9eSD6Iw5+mVZ0N5468JCfFrRzwrvAsIOFwCLNkiuQ091grgO9+7aKqtkTqvDKfZDqmIBsk81qqpq8uRD/e5j5ycA+FWgmYXqFIAUSj403BOYXdnV2zGwXtBO5xRL1RgZrHSQpvmQEvjYyPAgA5WhIebHYNTHBwGKLEft8K1erWkP1wqwEpUL8GSmr2xveMmvXl2D5+cx7mkHqyKIS+RIMHnZ9EBrStfE7aGy+05vaaJITYCr8HgwI2XqCTK60ReCKggeL6A50pEr1pg3VrFtVeAllA86CdH94YdDHmQt4NbMgFoh91yZ8jfM4UViPTJbFLLi/3YVFgBABInbGAjCKsHypQCv1DixRwDNP32LLy+RR8TXwx9rkCzor9kn4v0h427A9RpRriw8KFJZzYGZV70jeNwF0tvO38jHiOrjltppYsfe4EY+0Cwub8DtnrjpXzfNmM6Mbm9K5ZeYUB4xmhl0SAA8EQtsJhH3B8tpk1rn7zgbp+IhtSaVJ7ugsaomcdK46SxxJ4EtVOF66gbLvH2onhTcUrRqgCxoaR+YZpwM2vZDeCyww+UA+dlEVA1OuzOFWaCp/C9JcdBVTJZO5Wv+ounG+j/I="
 
