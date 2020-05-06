@@ -97,11 +97,12 @@ function renderCard(name, state, index) {
 function Dashboard(props) {
   let [formObjects, setFormObjects] = useState([]); 
   useEffect(() => {
+    //console.log(localStorage.email);
     axios.get("http://localhost:4000/dashboard", {headers: {Authorization: 'Bearer ' + localStorage.token}}).then(function(response) {
       setFormObjects(response.data);
     });
   }, []);
-  console.log(formObjects);
+  //console.log(formObjects);
 
 
   // const [cardTitle, setCardTitle] = useState("");
