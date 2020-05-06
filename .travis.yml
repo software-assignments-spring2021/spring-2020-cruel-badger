@@ -1,10 +1,11 @@
 language: node_js
 node_js:
-- "node"
-install:
-- npm install
-- npm install mocha chai --save-dev
+- node
 before_script:
 - cd back-end
 script:
+- npm install
+- npm install mocha chai --save-dev
 - npm test
+env:
+  - secure: cf2ex9juD2XKcHLzyiJSahDPCTkUnGVOtceRfpjTijFoFalbb1aWQRG6PHMZtKsoZAhAcGlIb7AlOF3aMO8r5mGBvScvv2J4AjwPiMNtfIgCFaDC8oesfMQfti1/OTKniuOBdw0Z+B2up+W+jYHp5C71aj5air8rg6I7rYc4KCTVVRGGLBa6KNNsCYT/u/IpbCOwCK4EqSDaShONBkilhCmH2b57UtBxiKHYAwsHsfyJVjVC6+h/F7iT3Pm7RnQe+ejznv90LZkYTXxCkqNwW7bhQCDyCq3UlBFSBinL5UQ4siDYa6TueRXWGzlhc6TwJsjmvtCzwv/RkTFOwUQlqii/UfzPZ4I1elpZGkvmzoo3KWjVZKFI51ajP1fCj3vnYPkjnSA7nsh6G08LDxcNqUvlcEcz9fVM8oOJXbvADSHhm1fo3fVqxlL5NuQQW1QM1pmY3dysUkeZTTH04ZEME2bPrVw5h/CuPmtA0gZ+bxuUdweFqSlQmPXxz5EaILs703WwcX7U12mwzG6c6aFvHuZKxbdMpRIAkUXuZb95U3RfrzuglI8A4gPSPM79xHh9CvNGY5aN/GadT3WROMIXAyHd1HFwVLtJXaBgg0K7Rvk69KH9PBjJvm8Yp02qas4mnxCXlu0mZgHvMTTc/42vwSAfp4cIEFb323Tw4iV9f4M=
