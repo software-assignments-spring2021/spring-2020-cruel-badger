@@ -1,10 +1,10 @@
 language: node_js
 node_js:
 - "node"
-install:
-- npm install
-- npm install mocha chai --save-dev
 before_script:
 - cd back-end
 script:
+- npm install
+- npm install mocha chai --save-dev
 - npm test
+
