@@ -614,9 +614,9 @@ app.get('/future', passport.authenticate('jwt', {
 
 		//financial status determines between -1, 0, 1 how well the plan will do
 		let financialStatus = 0;
-		if (moneyFlow > -500 && moneyFlow < 500) {
+		if (moneyFlow > -1000 && moneyFlow < 1000) {
 			financialStatus = 0;
-		} else if (moneyFlow <= -500) {
+		} else if (moneyFlow <= -1000) {
 			financialStatus = -1;
 		}
 		else {

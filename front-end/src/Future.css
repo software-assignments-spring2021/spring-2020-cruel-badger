@@ -54,7 +54,7 @@ futureOverViewBoxGood {
 
 futureOverViewBoxNeutral {
   flex: auto;
-  background-color: yellow;
+  background-color: #fcd200;
   /*border: 1px dotted green;*/
   font-family: 'Concert One', cursive;
   text-align: center;
@@ -65,7 +65,7 @@ futureOverViewBoxNeutral {
 
 futureOverViewBoxBad {
   flex: auto;
-  background-color: red;
+  background-color: #D41243;
   /*border: 1px dotted green;*/
   font-family: 'Concert One', cursive;
   text-align: center;
