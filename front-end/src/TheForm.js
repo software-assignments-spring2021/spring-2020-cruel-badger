@@ -45,7 +45,9 @@ const TheForm = (props) => {
 	    	email: localStorage.getItem("email")
 	    }
     	}).then(response => {
+    		console.log("the form after process form data");
     		console.log(response);
+    		console.log(response.data.futureID);
     		if (response.data.success || response.data.futureID) {
     			history.push({
 					pathname: "/view-future/" + response.data.futureID,

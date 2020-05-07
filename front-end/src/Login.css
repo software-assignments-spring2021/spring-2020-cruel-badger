@@ -48,13 +48,20 @@
 	font-family: 'Lato', sans-serif;
 }
 
-input{
+/*input{
 	margin-left: 35px;
+	margin-bottom: 5px;
+}*/
+
+.loginInput {
+	width: 80%;
+	margin-left: 10%;
 	margin-bottom: 5px;
 }
 
 #submit{
 	margin-left: 80px;
+	margin-bottom: 5%;
 }
 
 #bottominput{

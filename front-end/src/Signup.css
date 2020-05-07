@@ -47,17 +47,24 @@
 	text-align: left;
 	padding-top: 2px;
 	margin-bottom: 0px;
-	margin-left: 35px;
+	margin-left: 10%;
 	font-family: 'Lato', sans-serif;
 }
 
-input{
+/*input{
 	margin-left: 35px;
+	margin-bottom: 5px;
+}*/
+
+.accountInput {
+	width: 80%;
+	margin-left: 10%;
 	margin-bottom: 5px;
 }
 
 #submit{
-	margin-left: 80px;
+	margin-left: 35%;
+	margin-bottom: 5%;
 }
 
 #bottominput{
