@@ -13,7 +13,7 @@ function App() {
 
         <p className="blurb" id="blurb-top"> Not sure if you should take that job offer in Seattle? Want to see if you can afford a vacation in Hawaii? Buying a car? These are all things we can help you with!</p>
 
-        <a className="blurb" id="getstarted" href="/create-future">Click Here to Get Started</a> 
+        <a className="blurb" id="getstarted" href="/sign-up">Click Here to Get Started</a> 
       </div>
 
       <div className="midContent">

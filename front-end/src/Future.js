@@ -42,7 +42,7 @@ const FutureSummary = ( props ) => {
     //if positive cashflow
     if (props.status == 1) {
       //if positive cash flow but future state is more expensive
-      if (props.stateDiff > 5) {
+      if (props.stateDiff > 3) {
         return (
           <futureSummaryBox>
             <h1 className="summaryH1">Recommendations:</h1>
@@ -50,7 +50,7 @@ const FutureSummary = ( props ) => {
               <p className="summaryP">{props.futureState + " is " + props.stateDiff + "% more expensive to live in compared to " + props.currState + "."}</p>
           </futureSummaryBox>
         )
-      } else if (props.stateDiff < -5) {
+      } else if (props.stateDiff < -3) {
         //if positive cash flow but future state is less expensive
         return (
           <futureSummaryBox>
@@ -71,14 +71,14 @@ const FutureSummary = ( props ) => {
       }
     } else if (props.status == 0) {
         //if neutral cash flow but future state is more expensive
-        if (props.stateDiff > 5) {
+        if (props.stateDiff > 3) {
           return (
             <futureSummaryBox>
               <h1 className="summaryH1">Recommendations:</h1>
                 <p className="summaryP">{"This plan is okay. Your cash flow is close to 0, so you should watch out for the higher costs in " + props.futureState + "."}</p> 
                 <p className="summaryP">{props.futureState + " is " + props.stateDiff + "% more expensive to live in compared to " + props.currState + "."}</p>
             </futureSummaryBox>)
-        } else if (props.stateDiff < -5) {
+        } else if (props.stateDiff < -3) {
           //if neutral cash flow but future state is less expensive
           return (
             <futureSummaryBox>
@@ -96,7 +96,7 @@ const FutureSummary = ( props ) => {
         }
     } else {
       //if negative cash flow but future state is more expensive
-      if (props.stateDiff > 5) {
+      if (props.stateDiff > 3) {
         return (
           <futureSummaryBox>
             <h1 className="summaryH1">Recommendations:</h1>
@@ -104,7 +104,7 @@ const FutureSummary = ( props ) => {
               <p className="summaryP">{props.futureState + " is " + props.stateDiff + "% more expensive to live in compared to " + props.currState + "."}</p>
           </futureSummaryBox>
         )
-      } else if (props.stateDiff < -5) {
+      } else if (props.stateDiff < -3) {
         //if negative cash flow but future state is less expensive
         return (
           <futureSummaryBox>
@@ -126,27 +126,76 @@ const FutureSummary = ( props ) => {
     }
   } 
   if (props.heading === "outlook") {
+    //postive cash flow
     if (props.status == 1) {
-      return (
+      if (props.stateDiff > 3) {
+        return (
           <futureSummaryBox>
             <h1 className="summaryH1">Outlook:</h1>
               <p className="summaryP">{"The outlook on this plan is good! You have a positive cash flow, however you should watch out for the higher costs in " + props.futureState + "."}</p> 
           </futureSummaryBox>
         )
-    } else if (props.status == 0) {
-      return (
+      } else if (props.stateDiff < -3) {
+        return (
           <futureSummaryBox>
             <h1 className="summaryH1">Outlook:</h1>
-              <p className="summaryP">{"The outlook on this plan could be better. You have a positive cash flow, however you should watch out for the higher costs in " + props.futureState + "."}</p> 
+              <p className="summaryP">{"The outlook on this plan is good! You have a positive cash flow and costs in " + props.futureState + " is lower than " + props.currState + "."}</p> 
           </futureSummaryBox>
         )
-    } else {
-      return (
+      } else {
+        return (
           <futureSummaryBox>
             <h1 className="summaryH1">Outlook:</h1>
-              <p className="summaryP">{"The outlook on this plan does not look great. You have a positive cash flow, however you should watch out for the higher costs in " + props.futureState + "."}</p> 
+              <p className="summaryP">{"The outlook on this plan is good! The costs in " + props.futureState + " is similar to " + props.currState + "."}</p> 
           </futureSummaryBox>
-      )
+        ) 
+      }
+    } else if (props.status == 0) {
+      if (props.stateDiff > 3) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan could be better. You are close to equal cash flow, however you should watch out for the higher costs in " + props.futureState + "."}</p> 
+          </futureSummaryBox>
+        )
+      } else if (props.stateDiff < -3) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan could be better. You are close to equal cash flow, however costs in " + props.futureState + " is lower than " + props.currState + " so be mindful of spending."}</p> 
+          </futureSummaryBox>
+        )
+      } else {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan could be better. However the costs in " + props.futureState + " is similar to " + props.currState + " so be mindful of spending."}</p> 
+          </futureSummaryBox>
+        ) 
+      }
+    } else {
+      if (props.stateDiff > 3) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan does not look great. You have negative cash flow, and " + props.futureState + " is more expensive to live in. Possibly consider a different plan."}</p> 
+          </futureSummaryBox>
+        )
+      } else if (props.stateDiff < -3) {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan does not look great. You have negative cash flow. However costs in " + props.futureState + " is lower than " + props.currState + " so this plan could work out, but not very likely."}</p> 
+          </futureSummaryBox>
+        )
+      } else {
+        return (
+          <futureSummaryBox>
+            <h1 className="summaryH1">Outlook:</h1>
+              <p className="summaryP">{"The outlook on this plan does not look great. However the costs in " + props.futureState + " is similar to " + props.currState + ". But because of your negative cash flow, possibly reconsider your plan."}</p> 
+          </futureSummaryBox>
+        ) 
+      }
     }
   }
 }
@@ -222,7 +271,7 @@ const Future = (props) => {
         <FutureSummary heading="rec" status={financialIndicator} stateDiff={stateCost} currState={currState} futureState={futureState} />
       </futureSummary>
       <futureSummary>
-        <FutureSummary heading="outlook" status={financialIndicator} cashFlows={cashFlow} futureState={futureState} />
+        <FutureSummary heading="outlook" status={financialIndicator} cashFlows={cashFlow} stateDiff={stateCost} futureState={futureState} currState={currState} />
       </futureSummary>
       <futureSummary>
         <Popup trigger={<button className="future-button"> Save Future </button>} modal>

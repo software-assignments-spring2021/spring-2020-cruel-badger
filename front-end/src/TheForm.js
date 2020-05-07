@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './TheForm.css';
 
 import StepZilla from "react-stepzilla";
@@ -15,6 +15,7 @@ import { Redirect, Link, useHistory } from "react-router-dom";
 
 const TheForm = (props) => {
 	const history = useHistory();
+	let [errMess, setErrMess] = useState("");
 	let results = {};
 	const handleChange = (event) => {
 		//console.log(event.target.name + "=" + event.target.value);
@@ -45,11 +46,16 @@ const TheForm = (props) => {
 	    }
     	}).then(response => {
     		console.log(response);
+    		if (response.data.success || response.data.futureID) {
+    			history.push({
+					pathname: "/view-future/" + response.data.futureID,
+					state: { data: response.data.future }
+				})
+    		}
+    		else {
 
-    		history.push({
-				pathname: "/view-future/" + response.data.futureID,
-				state: { data: response.data.future }
-			})
+    		}
+    		
 
     	}).catch(error => {
     		console.log(error);
@@ -70,7 +76,7 @@ const TheForm = (props) => {
 		{name: 'Money In', component: <MoneyIn handleChange={handleChange} results={results}/>},
 		{name: 'Money Out', component: <MoneyOut handleChange={handleChange} results={results}/>},
 		{name: 'Other Expenses', component: <OtherExpenses handleChange={handleChange} results={results}/>},
-		{name: 'Submit', component: <Submit handleSubmit={handleSubmit} results={results}/>}
+		{name: 'Submit', component: <Submit handleSubmit={handleSubmit} results={results} />}
 
 	]
 

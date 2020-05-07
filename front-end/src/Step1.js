@@ -8,11 +8,11 @@ const Step1 = (props) => {
 		<div>
 			<h2 className="stepTitle">Intro</h2>
 			<h3>Name your future plan: </h3>
-			<input type="text" name="name" defaultValue={props.results.salary} onChange={props.handleChange}/> 
+			<input type="text" name="name" defaultValue={props.results.name} onChange={props.handleChange}/> 
 			<br/>
 			<br/>
 			<h3>What state are you currently in?</h3>
-			<select name="currentState" defaultValue={props.results.state} onChange={props.handleChange}>
+			<select name="currentState" defaultValue={props.results.currentState} onChange={props.handleChange}>
 				<option value="">Make a Selection</option>
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>
@@ -71,7 +71,7 @@ const Step1 = (props) => {
 			<br/>
 
 			<h3>What state are you moving to?</h3>
-			<select name="futureState" defaultValue={props.results.state} onChange={props.handleChange}>
+			<select name="futureState" defaultValue={props.results.futureState} onChange={props.handleChange}>
 				<option value="">Make a Selection</option>
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>

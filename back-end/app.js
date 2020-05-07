@@ -22,6 +22,87 @@ require('./db.js');
 
 //const PlanModel = mongoose.model("Plan");
 
+const Validator = require('validatorjs');
+const validator = (body, rules, messages, cb) => {
+	console.log("in validator");
+
+    const validation = new Validator(body, rules, messages);
+    //console.log(validation.passes());
+    validation.passes(() => cb(null, true));
+    validation.fails(() => cb(validation.errors, false));
+};
+
+
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]/;
+
+Validator.register('strict', value => passwordRegex.test(value),
+    'password must contain at least one uppercase letter, one lowercase letter and one number');
+
+const signupValidator = (req, res, next) => {
+	let checkData = JSON.parse(Object.keys(req.body)[0]);
+	const validRules = {
+	  	"username": "required|string",
+	  	"password": "required|string|min:6|confirmed|strict",
+	  	"email": "required|email"
+	}
+
+	validator(checkData, validRules, {}, (err, status) => {
+		if (!status) {
+			console.log(status);
+			console.log(err);
+
+			res.json({success: false, message: "Validation failed", data: err});
+		}
+		else {
+			next();
+		}
+	});
+}
+
+const createValidator = (req, res, next) => {
+	//console.log(JSON.parse(Object.keys(req.body)[0]))
+	let checkData = JSON.parse(Object.keys(req.body)[0]).results;
+	const validRules = {
+		"name": "required|string",
+		"currentState": "required|string",
+		"futureState": "required|string",
+		"salary": "required|numeric",
+		"salaryType": "required|string",
+		"otherIncome": "required|numeric",
+	    "otherIncomeType": 'required|string',
+	    "housingLow": 'required|numeric',
+	    "housingHigh": `required|numeric|min:${checkData.housingLow}`,
+	    "foodLow": 'required|numeric',
+	    "foodHigh": `required|numeric|min:${checkData.foodLow}`,
+	    "foodType": 'required|string',
+	    "transportLow": 'required|numeric',
+	    "transportHigh": `required|numeric|min:${checkData.transportLow}`,
+	    "transportType": 'required|string',
+	    "savingsLow": 'required|numeric',
+	    "savingsHigh": `required|numeric|min:${checkData.savingsLow}`,
+ 	    "savingsType": 'required|string',
+	    "leisureLow": 'required|numeric',
+	    "leisureHigh": `required|numeric|min:${checkData.leisureLow}`,
+	    "leisureType": 'required|string',
+	    "otherLow": 'required|numeric',
+	    "otherHigh": `required|numeric|min:${checkData.otherLow}`,
+	    "otherType": 'required|string',
+	    "debt": 'required|numeric'
+
+	}
+	validator(checkData, validRules, {}, (err, status) => {
+		if (!status) {
+			console.log(status);
+			console.log(err);
+
+			res.json({success: false, message: "Validation failed", data: err});
+		}
+		else {
+			next();
+		}
+	});
+}
+
 
 let plans = []
 
@@ -206,7 +287,7 @@ let abbrToState = (abbr) => {
 
 
 //route to recieve and process front end results
-app.post("/processFormData", (req, res) => {
+app.post("/processFormData", createValidator, (req, res) => {
 	console.log("In the backend");
 	//console.log(req.body);
 
@@ -577,44 +658,17 @@ app.get('/future', passport.authenticate('jwt', {
 
 });
 
-//testing future results
-app.get('/futureDataTest', (req, res) => {
-    // assemble an object containing the data we want to send
-    const body = {
-        pieChart: [
-	        ['Expense', 'Dollars'],
-	        ['Food', 2000], ['Rent', 4000],
-	        ['Commute', 2500],
-	        ['Entertainment', 1500],
-	        ['Utilities', 350],
-        ],
-        barChart: [['Month', 'In', 'Out'],
-                  ['Jan', 10000, 8000],
-                  ['Feb', 10000, 4000],
-                  ['Mar', 10000, 11000],
-                  ['Apr', 10000, 3000],
-                  ['May', 10000, 5000],
-                  ['June', 10000, 8000],
-                  ['July', 10000, 4650],
-                  ['Aug', 10000, 6000],
-                  ['Sept', 10000, 3470],
-                  ['Oct', 10000, 2340],
-                  ['Nov', 10000, 5232],
-                  ['Dec', 10000, 7234],]
-
-    }
-    // send the response as JSON text to the client
-    res.json(body)
-});
 
 //GETTING SIGN UP DATA
 
 
 //4-27 G adding stuff to try auth
-app.post('/signup', function(req, res) {
+app.post('/signup', signupValidator, function(req, res) {
   console.log("in sign up");
   let formData = JSON.parse(Object.keys(req.body)[0]);
   console.log(formData);
+
+  
 
   if (!formData.username || !formData.password) {
     res.json({success: false, msg: 'Please pass username and password.'});
@@ -629,7 +683,7 @@ app.post('/signup', function(req, res) {
     // save the user
     newUser.save(function(err) {
       if (err) {
-      	console.log("error");
+      	//console.log("error");
       	console.log(err);
         return res.json({success: false, msg: 'Username already exists.'});
       }
@@ -640,13 +694,17 @@ app.post('/signup', function(req, res) {
 });
 
 app.post('/signin', function(req, res) {
-	console.log("in sign in");
+	//console.log("in sign in");
+	//console.log(req);
   let formData = JSON.parse(Object.keys(req.body)[0]);
-  console.log(formData);
+  //console.log(formData);
   User.findOne({
     username: formData.username
   }, function(err, user) {
-    if (err) throw err;
+    if (err) {
+    	console.log("error finding user for signing in");
+    	throw err;
+    }
 
     if (!user) {
     	console.log("user not found");
@@ -654,6 +712,7 @@ app.post('/signin', function(req, res) {
     } else {
       // check if password matches
       user.comparePassword(formData.password, function (err, isMatch) {
+      	console.log("user found and password matches");
         if (isMatch && !err) {
           // if user is found and password is right create a token
           var token = jwt.sign(user.toJSON(), "secret", {
@@ -681,6 +740,27 @@ app.post('/delete', function(req, res){
 		}
 	})
 })
+
+app.post('/checkSession', function(req, res) {
+	//console.log("============IN CHECK SESSION===================");
+	//console.log(JSON.parse(Object.keys(req.body)[0]));
+	let sessionData = JSON.parse(Object.keys(req.body)[0]);
+	//console.log(sessionData);
+	//console.log(sessionData.username + " " + typeof sessionData.username);
+	//console.log(sessionData.email);
+	if(typeof sessionData.username === "undefined" || typeof sessionData.email === "undefined" || typeof sessionData.token === "undefined"){
+		//console.log("false");
+		res.send(false)
+	}
+	else {
+		//console.log("true");
+		res.send(true)
+	}
+})
+
+app.get("/logout", function(req, res) {
+	req.logout();
+});
 
 module.exports = app.listen(4000);
 
