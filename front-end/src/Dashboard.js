@@ -3,42 +3,7 @@ import './assets/css/dashboard.css'
 import Header from "./header.js";
 import axios from "axios";
 
-
-//hard-coded data for testing purposes (will be changed)
-// let formObjects = [{  name: "Go to Grad school", 
-//                       state: "IL", 
-//                       income: 1000,
-//                       tax: 1000,
-//                       inFlow: 1000,
-//                       outFlow: 1000
-//                     },
-//                     {  name: "Take a vacation", 
-//                       state: "IN", 
-//                       income: 1000,
-//                       tax: 1000,
-//                       inFlow: 1000,
-//                       outFlow: 1000
-//                     },
-//                     {  name: "Move back home", 
-//                       state: "NV", 
-//                       income: 1000,
-//                       tax: 1000,
-//                       inFlow: 1000,
-//                       outFlow: 1000
-//                     },
-//                     {  name: "Accept that CS job", 
-//                       state: "CA", 
-//                       income: 1000,
-//                       tax: 1000,
-//                       inFlow: 1000,
-//                       outFlow: 1000
-//                     }
-// ];
-
-
-
-
-function renderCard(name, state, index) {
+function renderCard(name, state, moneyIn, moneyOut, index) {
 
 // function renderCard(name, state) {
 
@@ -60,28 +25,75 @@ function renderCard(name, state, index) {
 
   }
 
+  let moneyDiff = moneyIn - moneyOut;
+  //equal money flow in and out
+  if (moneyDiff > -1000 && moneyDiff < 1000) {
+      return (
+       <div className="card" style={{backgroundColor: "#fcd200"}}>
+            <h3 className="title">{name}</h3>
+            <a href="/dashboard" onClick={handleClick} className="btn" style={{backgroundColor: "#fcd200"}}><i className="fa fa-trash"></i></a>
+            <div className="bar">
+            <div className="emptybar"></div>
+                <p> Future State: </p>
+                <p> {state} </p>
 
-
-  return (
-     <div className="card">
-          <h3 className="title">{name}</h3>
-          <a href="/dashboard" onClick={handleClick} className="btn" ><i className="fa fa-trash"></i></a>
-          <div className="bar">
-          <div className="emptybar"></div>
-
-              <p> {state} </p>
-
-          <div className="filledbar"></div>
+            <div className="filledbar"></div>
+            </div>
+            <a href={"/view-future/" + index}>
+            <div className="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style={{fill: "#fcd200"}}>
+                <circle className="stroke" cx="60" cy="60" r="50"/>
+              </svg>
+            </div>
+            </a>
           </div>
-          <a href={"/view-future/" + index}>
-          <div className="circle">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-              <circle className="stroke" cx="60" cy="60" r="50"/>
-            </svg>
+      )
+    } else if (moneyDiff <= -1000) {
+      //negative money flow
+      return (
+       <div className="card">
+            <h3 className="title">{name}</h3>
+            <a href="/dashboard" onClick={handleClick} className="btn" ><i className="fa fa-trash"></i></a>
+            <div className="bar">
+            <div className="emptybar"></div>
+                <p> Future State: </p>
+                <p> {state} </p>
+
+            <div className="filledbar"></div>
+            </div>
+            <a href={"/view-future/" + index}>
+            <div className="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <circle className="stroke" cx="60" cy="60" r="50"/>
+              </svg>
+            </div>
+            </a>
           </div>
-          </a>
-        </div>
-    )
+      )
+    }
+    else {
+      //positive money flow
+      return (
+       <div className="card" style={{backgroundColor: "green"}}>
+            <h3 className="title">{name}</h3>
+            <a href="/dashboard" onClick={handleClick} className="btn" style={{backgroundColor: "green"}}><i className="fa fa-trash"></i></a>
+            <div className="bar">
+            <div className="emptybar"></div>
+                <p> Future State: </p>
+                <p> {state} </p>
+
+            <div className="filledbar"></div>
+            </div>
+            <a href={"/view-future/" + index}>
+            <div className="circle">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style={{fill: "green"}}>
+                <circle className="stroke" cx="60" cy="60" r="50" />
+              </svg>
+            </div>
+            </a>
+          </div>
+      )
+    }
 }
 
 
@@ -102,7 +114,7 @@ function Dashboard(props) {
       setFormObjects(response.data);
     });
   }, []);
-  //console.log(formObjects);
+  console.log(formObjects);
 
 
   // const [cardTitle, setCardTitle] = useState("");
@@ -114,7 +126,7 @@ function Dashboard(props) {
 
 
       <div className="container">
-          {formObjects.map((obj, index) => (renderCard(obj.name, obj.futureStateAbbr, index)))}
+          {formObjects.map((obj, index) => (renderCard(obj.name, obj.futureStateAbbr, obj.moneyIn_tax, obj.adjustedMoneyOut_tax, index+1)))}
       </div>
 
 

@@ -554,15 +554,17 @@ app.post("/processFormData", createValidator, (req, res) => {
       	newPlan.save((err) => {
       		if (err) throw err;
       		console.log("future saved");
-      	})
+      		Plan.find({email: formData.email}, (err, results) => {
+	      		if (err) console.log(err);
+	      		//let resultId = results.length-1;
+	      		// console.log("the length is");
+	      		// console.log(results.length);
+	      		// console.log(results);
+	      		res.json({future: obj, futureID: results.length});
+      		});
+      	});
 
-      	Plan.find({email: formData.email}, (err, results) => {
-      		if (err) console.log(err);
-      		// let id = results.length-1;
-      		// console.log(id);
-      		res.json({future: obj, futureID: results.length});
 
-      	})
 
       	// futureArray.push(obj);
       	// let id = futureArray.length-1;
@@ -595,8 +597,8 @@ app.get('/dashboard', passport.authenticate('jwt', {
 app.get('/future', passport.authenticate('jwt', {
   session: false
 }), (req, res) => {
-	console.log(req.headers.authorization);
-	console.log(req.query);
+	// console.log(req.headers.authorization);
+	// console.log(req.query);
 	let index = JSON.parse(req.query.id);
 	console.log("index id")
 	console.log(index.id);
@@ -605,16 +607,16 @@ app.get('/future', passport.authenticate('jwt', {
 	Plan.find({email:req.user.email}, (err, results) => {
 		if (err) throw err;
 		console.log(results);
-		let future = results[index.id];
+		let future = results[index.id - 1];
 
 		//get money in vs money out flow
 		let moneyFlow = future.moneyIn_tax - future.adjustedMoneyOut_tax;
 
 		//financial status determines between -1, 0, 1 how well the plan will do
 		let financialStatus = 0;
-		if (moneyFlow > -500 && moneyFlow < 500) {
+		if (moneyFlow > -1000 && moneyFlow < 1000) {
 			financialStatus = 0;
-		} else if (moneyFlow <= -500) {
+		} else if (moneyFlow <= -1000) {
 			financialStatus = -1;
 		}
 		else {

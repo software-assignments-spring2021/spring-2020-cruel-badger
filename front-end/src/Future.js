@@ -212,6 +212,7 @@ const Future = (props) => {
   let [futureState, setFutureState] = useState();
   useEffect(() => {
     console.log("in use effect in future page");
+    console.log(futureID);
     axios.get("/future", {params: {id: futureID}, headers: {Authorization: 'Bearer ' + localStorage.token}}).then(function(response) {
 
       //console.log(response.data);
@@ -272,27 +273,6 @@ const Future = (props) => {
       </futureSummary>
       <futureSummary>
         <FutureSummary heading="outlook" status={financialIndicator} cashFlows={cashFlow} stateDiff={stateCost} futureState={futureState} currState={currState} />
-      </futureSummary>
-      <futureSummary>
-        <Popup trigger={<button className="future-button"> Save Future </button>} modal>
-          {close => (
-            <div className="future-modal-button">
-              <a className="future-close" onClick={close}>
-                &times;
-              </a>
-
-              <div className="button-actions">
-                <button className="future-save-button" onClick={() => {
-                    console.log("modal closed ");
-                    close();
-                    window.location.href="/sign-up";
-                  }}>
-                  Sign in to Save Your Future
-                </button>
-              </div>
-            </div>
-          )}
-        </Popup>
       </futureSummary>
     </>
   )

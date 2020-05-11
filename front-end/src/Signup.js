@@ -74,16 +74,16 @@ function Signup(props) {
 				<div id="signupform">
 				<form onSubmit={handleSubmit} action="">
 					<p className="formstuff">Email:</p>
-					<input type="email" name="email" defaultValue="" onChange={handleChange}/> 
+					<input className="accountInput" type="email" name="email" defaultValue="" onChange={handleChange}/> 
 
 					<p className="formstuff">Username:</p>
-					<input type="text" name="username" defaultValue="" onChange={handleChange}/> 
+					<input className="accountInput" type="text" name="username" defaultValue="" onChange={handleChange}/> 
 
 					<p className="formstuff">Password:</p>
-					<input type="password" name="password" defaultValue="" onChange={handleChange}/> 
+					<input className="accountInput" type="password" name="password" defaultValue="" onChange={handleChange}/> 
 
 					<p className="formstuff">Confirm Password:</p>
-					<input type="password" id="bottominput" name="password2" defaultValue="" onChange={handleChange}/> 
+					<input className="accountInput" type="password" id="bottominput" name="password2" defaultValue="" onChange={handleChange}/> 
 
 					<input type="submit" id="submit" name="Submit" onclick={popup} />
 				</form>

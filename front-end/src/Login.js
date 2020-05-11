@@ -66,10 +66,10 @@ function Login(props) {
 					<form onSubmit={handleSubmit}>
 
 					<p className="formstuff">Username:</p>
-					<input type="text" name="username" defaultValue="" onChange={handleChange}/> 
+					<input className="loginInput" type="text" name="username" defaultValue="" onChange={handleChange}/> 
 
 					<p className="formstuff">Password:</p>
-					<input type="password" name="password" defaultValue="" id="bottominput" onChange={handleChange} /> 
+					<input className="loginInput" type="password" name="password" defaultValue="" id="bottominput" onChange={handleChange} /> 
 
 					<input type="submit" id="submit" name="Submit"/>
 
