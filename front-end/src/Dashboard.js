@@ -13,7 +13,7 @@ function renderCard(name, state, moneyIn, moneyOut, index) {
     //alert("Future has been deleted");
     axios({
       "method":"POST",
-      "url":"http://localhost:4000/delete",
+      "url":"/delete",
       "headers":{
       "content-type": "application/x-www-form-urlencoded"
     },  
@@ -110,7 +110,7 @@ function Dashboard(props) {
   let [formObjects, setFormObjects] = useState([]); 
   useEffect(() => {
     //console.log(localStorage.email);
-    axios.get("http://localhost:4000/dashboard", {headers: {Authorization: 'Bearer ' + localStorage.token}}).then(function(response) {
+    axios.get("/dashboard", {headers: {Authorization: 'Bearer ' + localStorage.token}}).then(function(response) {
       setFormObjects(response.data);
     });
   }, []);

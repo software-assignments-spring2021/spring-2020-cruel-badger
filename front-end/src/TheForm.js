@@ -35,7 +35,7 @@ const TheForm = (props) => {
 
 		axios({
 	    "method":"POST",
-	    "url":"http://localhost:4000/processFormData",
+	    "url":"/processFormData",
 	    "headers":{
 	    "content-type": "application/x-www-form-urlencoded"
 		},	
