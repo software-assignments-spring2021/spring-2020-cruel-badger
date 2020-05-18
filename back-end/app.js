@@ -14,6 +14,8 @@ const jwt = require('jsonwebtoken');
 
 app.use( bodyParser.urlencoded({ extended : false }) );
 
+app.set('trust proxy', 1);
+
 const User = mongoose.model("User");
 const Plan = mongoose.model("Plan");
 

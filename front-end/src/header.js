@@ -15,7 +15,7 @@ const Header = (props) => {
 	useEffect(() => {
     //console.log("in use effect in header page");
     //console.log(user);
-    axios({"method":"POST", "url":"http://localhost:4000/checkSession", "headers":{"content-type": "application/x-www-form-urlencoded"
+    axios({"method":"POST", "url":"/checkSession", "headers":{"content-type": "application/x-www-form-urlencoded"
 		}, data: user}).then(res => {
 	        //console.log(res);
 	        //console.log(res.data);
